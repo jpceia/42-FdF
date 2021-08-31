@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 18:33:58 by jceia             #+#    #+#             */
-/*   Updated: 2021/08/31 22:06:12 by jceia            ###   ########.fr       */
+/*   Updated: 2021/08/31 23:29:23 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,19 @@ void	grid_init(t_grid *grid)
 	grid->data = NULL;
 	grid->width = 0;
 	grid->height = 0;
+}
+
+static void	clear_str_array(char **str_arr, int len)
+{
+	int	index;
+
+	index = 0;
+	while (index < len)
+	{
+		free(str_arr[index]);
+		index++;
+	}
+	free(str_arr);
 }
 
 double	*grid_parse_line(char *line)
@@ -40,7 +53,7 @@ double	*grid_parse_line(char *line)
 	arr = (double *)malloc(ncols * sizeof(*arr));
 	if (!arr)
 	{
-		free(s_split);
+		clear_str_array(s_split, ncols);
 		ft_putendl_error("Error assigning memory to array");
 		exit(EXIT_FAILURE);
 	}
@@ -50,6 +63,7 @@ double	*grid_parse_line(char *line)
 		arr[index] = ft_atoi(s_split[index]);
 		index++;
 	}
+	clear_str_array(s_split, ncols);
 	return (arr);
 }
 
@@ -78,6 +92,7 @@ void	grid_append_line(t_grid *grid, char *line)
 		free(grid->data);
 	}
 	new_data[grid->height] = grid_parse_line(line);
+	grid->data = new_data;
 	grid->height++;
 }
 
@@ -86,7 +101,7 @@ void	grid_clear(t_grid *grid)
 	int	index;
 
 	index = 0;
-	while (index < (int)grid->height - 1)
+	while (index < (int)grid->height)
 	{
 		free(grid->data[index]);
 		index++;
@@ -107,7 +122,11 @@ void	grid_parse_file(t_grid *grid, char *fname)
 	}
 	grid_init(grid);
 	while (ft_get_next_line(fd, &line) > 0)
+	{
 		grid_append_line(grid, line);
+		free(line);
+	}
+	free(line);
 	close(fd);
 }
 

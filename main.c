@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 03:32:53 by jceia             #+#    #+#             */
-/*   Updated: 2021/08/31 22:04:42 by jceia            ###   ########.fr       */
+/*   Updated: 2021/08/31 23:15:04 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ int	main(int argc, char **argv)
 	}
 	grid_parse_file(&grid, argv[1]);
 	grid_print(&grid);
-	//grid_clear(&grid);
+	grid_clear(&grid);
 }
