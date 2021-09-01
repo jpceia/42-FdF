@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/31 20:15:13 by jceia             #+#    #+#             */
-/*   Updated: 2021/08/31 22:03:46 by jceia            ###   ########.fr       */
+/*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
+/*   Updated: 2021/09/02 00:10:43 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef FDF_H
+# define FDF_H
 
 # include <string.h>
 
 typedef struct s_grid
 {
-	double	**data;
-	size_t	width;
-	size_t	height;
+	float	**data;
+	int		width;
+	int		height;
 }	t_grid;
 
-void	grid_init(t_grid *grid);
-double	*grid_parse_line(char *line);
-void	grid_append_line(t_grid *grid, char *line);
+
+void	grid_init(t_grid *grid, int width, int height);
+float	*grid_parse_line(char *line);
+void	grid_append_line(float *arr, int N, char *line);
 void	grid_clear(t_grid *grid);
 void	grid_parse_file(t_grid *grid, char *fname);
 void	grid_print(t_grid	*grid);
+float	grid_max(t_grid *grid);
+float	grid_min(t_grid *grid);
+float	get_nbr(char *s);
+void	ft_putfloat(float x);
 
 #endif

@@ -1,34 +1,50 @@
-NAME=myfdf
+NAME		= fdf
 
-LIBFTDIR = ./libft
-LIBFT = $(LIBFTDIR)/libft.a
+LIBFT_DIR	= ./libft
+LIBFT		= $(LIBFT_DIR)/libft.a
 
-SRC		= main.c parser.c
-OBJ		= $(SRC:%.c=%.o)
+MLXUT_DIR	= ./mlx_utils
+MLXUT		= $(MLXUT_DIR)/mlx_utils.a
+
+INC_DIR		= .
+
+SRC_DIR		= src
+OBJ_DIR		= obj
+
+SRCS		= $(shell find $(SRC_DIR) -name *.c -type f)
+OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 CC			= gcc
 RM			= rm -f
 
-CFLAGS		= -Wall -Wextra -Werror -I$(LIBFTDIR) -g #-I/usr/include -Imlx_linux -O3
-LFLAGS		= -g #-Lmlx_Linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+CFLAGS		= -Wall -Wextra -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLXUT_DIR) -I/usr/local/include -Imlx_linux -O3
+LFLAGS		= -L/usr/local/lib -Lmlx_Linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz
 
-%.o: %.c
+$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(LIBFT):
-	$(MAKE) -C $(LIBFTDIR)
-
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $^ $(LFLAGS) -o $@
+$(NAME): $(OBJS) $(MLXUT) $(LIBFT)
+	$(CC) $^ -o $@ $(LFLAGS)
 
 all: $(NAME)
 
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+$(MLXUT):
+	$(MAKE) -C $(MLXUT_DIR)
+
 clean:
-	$(RM) $(OBJ)
+	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(MLXUT_DIR) clean
+	$(RM) -rf $(OBJ_DIR)
 
 fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(MLXUT_DIR) fclean
 	$(RM) $(NAME)
 
-re:	fclean $(NAME)
+re:	fclean all
 
 .PHONY:		all clean fclean re
