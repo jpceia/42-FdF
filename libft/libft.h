@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 21:27:10 by jpceia            #+#    #+#             */
-/*   Updated: 2021/08/31 19:54:51 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/01 22:55:50 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,26 @@ char	*ft_strdup(const char *src);
 char	*ft_strndup(char const *str, int n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char	*ft_strmap(char const *s, char (*f)(char));
+char	*ft_strlower(char const *s);
+char	*ft_strupper(char const *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *str, char c);
 int		ft_strwc(char const *s, char c);
 int		ft_contains(char c, char const *charset);
+int		ft_startswith(char *s, char *pref);
+int		ft_endswith(char *s, char *suff);
 char	*ft_strreverse(char *s);
 char	*ft_straddc(char *s, char c);
 char	*ft_empty_string(void);
+void	ft_str_array_clear(char **str_arr, int len);
 
 /*
  * Number <=> String conversion functions
  */
 int		ft_atoi(const char *str);
+int		ft_atoi_base(char *str, char *base);
 char	*ft_itoa(int n);
 long	ft_atol(const char *str);
 char	*ft_lltoa(long long nb);
@@ -75,6 +82,7 @@ char	*ft_ulltoa_base(unsigned long long nb, const char *base);
 /*
  * Arithmetic functions
  */
+int		ft_iabs(int x);
 int		ft_imax(int x, int y);
 int		ft_imin(int x, int y);
 int		ft_mod(int x, int y);
