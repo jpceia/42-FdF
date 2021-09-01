@@ -6,9 +6,12 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:28:12 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/01 23:28:13 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/02 00:29:58 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef COLORS_H
+# define COLORS_H
 
 typedef int	t_color;
 typedef struct s_gradient
@@ -22,3 +25,5 @@ int		get_t(int trgb);
 int		get_r(int trgb);
 int		get_g(int trgb);
 int		get_b(int trgb);
+
+#endif

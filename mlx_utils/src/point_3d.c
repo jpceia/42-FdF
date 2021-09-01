@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 22:32:05 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/01 22:33:11 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/02 00:26:40 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_point3D	point3D_create(float x, float y, float z)
 {
-	t_point3D   p;
+	t_point3D	p;
 
 	p.x = x;
 	p.y = y;
