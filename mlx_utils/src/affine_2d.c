@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   affine_2d.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/01 22:35:55 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/02 00:21:29 by jceia            ###   ########.fr       */
+/*   Created: 2021/09/02 01:17:09 by jceia             #+#    #+#             */
+/*   Updated: 2021/09/02 01:31:47 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
+#include "geom.h"
 
-int	create_trgb(int t, int r, int g, int b)
+t_point2D   translation_2D(t_point2D p, t_vector2D v)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+    return (point2D_add(p, v));
 }
 
-int	get_t(int trgb)
+t_point2D   scale_2D(t_point2D p, float c1, float c2)
 {
-	return (trgb & (0xFF << 24));
-}
-
-int	get_r(int trgb)
-{
-	return (trgb & (0xFF << 16));
-}
-
-int	get_g(int trgb)
-{
-	return (trgb & (0xFF << 8));
-}
-
-int	get_b(int trgb)
-{
-	return (trgb & 0xFF);
+    p.x *= c1;
+    p.y *= c2;
+    return (p);
 }

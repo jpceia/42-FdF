@@ -6,12 +6,16 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 22:50:23 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/02 00:29:08 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/02 01:31:32 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GEOM_H
 # define GEOM_H
+
+# define SQRT_2 1.4142135623730951
+# define SQRT_3 1.7320508075688772
+# define SQRT_6 2.449489742783178
 
 /*
  * 2D Structures
@@ -35,6 +39,9 @@ t_vector2D	point2D_subtract(t_point2D a, t_point2D b);
 t_point2D	point2D_add(t_point2D a, t_vector2D v);
 t_vector2D	point2D_scalar_mul(t_vector2D v, float l);
 
+t_point2D   translation_2D(t_point2D p, t_vector2D v);
+t_point2D   scale_2D(t_point2D p, float c1, float c2);
+
 /*
  * 3D Structures
  */
@@ -57,5 +64,13 @@ t_point3D	point3D_create(float x, float y, float z);
 t_vector3D	point3D_subtract(t_point3D a, t_point3D b);
 t_point3D	point3D_add(t_point3D a, t_vector3D v);
 t_vector3D	point3D_scalar_mul(t_vector3D v, float l);
+
+t_point3D   translation_3D(t_point3D p, t_vector3D v);
+t_point3D   scale_3D(t_point3D p, float cx, float cy, float cz);
+
+/*
+ * Projections 3D -> 2D
+ */
+t_point2D   proj_isometric(t_point3D p);
 
 #endif
