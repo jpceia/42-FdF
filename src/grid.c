@@ -6,20 +6,20 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/02 00:17:03 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/02 02:29:04 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
-#include "geom_utils.h"
+#include "geom.h"
 #include <stdlib.h>
 
 void	grid_init(t_grid *grid, int width, int height)
 {
 	int		index;
 	float	*arr;
-	
+
 	grid->data = (float **)malloc(width * height * sizeof(**grid->data));
 	if (!grid->data)
 	{
@@ -68,7 +68,7 @@ float	grid_max(t_grid *grid)
 		j = 0;
 		while (j < grid->width - 1)
 		{
-			if (v > grid->data[i][j])
+			if (v < grid->data[i][j])
 				v = grid->data[i][j];
 			j++;
 		}
@@ -90,7 +90,7 @@ float	grid_min(t_grid *grid)
 		j = 0;
 		while (j < grid->width - 1)
 		{
-			if (v < grid->data[i][j])
+			if (v > grid->data[i][j])
 				v = grid->data[i][j];
 			j++;
 		}
