@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/02 02:29:04 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/07 06:44:37 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	grid_init(t_grid *grid, int width, int height)
 		if (!arr)
 		{
 			ft_putendl_error("Error assigning memory to array");
+			grid->height = index;
+			grid_clear(grid);
 			exit(EXIT_FAILURE);
 		}
 		grid->data[index] = arr;
