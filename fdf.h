@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/02 01:07:06 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/07 04:54:20 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ typedef struct s_grid
 
 
 void	grid_init(t_grid *grid, int width, int height);
-float	*grid_parse_line(char *line);
-void	grid_append_line(float *arr, int N, char *line);
 void	grid_clear(t_grid *grid);
 void	grid_parse_file(t_grid *grid, char *fname);
 void	grid_print(t_grid	*grid);

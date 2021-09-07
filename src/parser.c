@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   grid_parser.c                                      :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 18:33:58 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/02 00:16:18 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/07 04:54:29 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void	grid_append_line(float *arr, int N, char *line)
+static void	grid_append_line(float *arr, int N, char *line)
 {
 	char	**s_split;
 	int		index;
@@ -42,9 +42,27 @@ void	grid_append_line(float *arr, int N, char *line)
 	ft_str_array_clear(s_split, N);
 }
 
-int	protected_open(char *fname)
+static void	list_to_grid(t_grid *grid, t_list *lst)
 {
-	int	fd;
+	int		index;
+	t_list	*node;
+
+	grid_init(grid, ft_strwc(lst->content, ' '), ft_lstsize(lst));
+	index = 0;
+	node = lst;
+	while (node)
+	{
+		grid_append_line(grid->data[index++], grid->width, node->content);
+		node = node->next;
+	}
+	ft_lstclear(&lst, free);
+}
+
+void	grid_parse_file(t_grid *grid, char *fname)
+{
+	t_list	*lst;
+	char	*line;
+	int		fd;
 
 	fd = open(fname, O_RDONLY);
 	if (fd < 0)
@@ -52,43 +70,12 @@ int	protected_open(char *fname)
 		ft_putendl_fd("Error opening file", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
-	return (fd);
-}
-
-int	fd_count_newlines(int fd)
-{
-	int		counter;
-	char	*line;
-
-	counter = 0;
+	lst = NULL;
 	while (ft_get_next_line(fd, &line) > 0)
-	{
-		counter++;
-		free(line);
-	}
+		ft_lstadd_back(&lst, ft_lstnew(line));
 	free(line);
 	close(fd);
-	return (counter);
-}
-
-void	grid_parse_file(t_grid *grid, char *fname)
-{
-	char	*line;
-	int		fd;
-	int		index;
-
-	fd = protected_open(fname);
-	ft_get_next_line(fd, &line);
-	grid_init(grid, ft_strwc(line, ' '), fd_count_newlines(fd) + 1);
-	fd = protected_open(fname);
-	index = 0;
-	while (ft_get_next_line(fd, &line) > 0)
-	{
-		grid_append_line(grid->data[index++], grid->width, line);
-		free(line);
-	}
-	free(line);
-	close(fd);
+	list_to_grid(grid, lst);
 }
 
 void	grid_print(t_grid	*grid)
