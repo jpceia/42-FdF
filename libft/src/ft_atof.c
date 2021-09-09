@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 02:06:27 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/09 02:56:47 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/09 02:59:56 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static float	ft_atof_frac(const char *str)
 float	ft_atof(const char *str)
 {
 	float	x;
-	int		pos;
 	int		sgn;
 
 	x = 0;
