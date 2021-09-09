@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 21:27:10 by jpceia            #+#    #+#             */
-/*   Updated: 2021/09/01 22:55:50 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/09 02:57:21 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ typedef struct s_list
 	struct s_list	*next;
 	void			*content;
 }	t_list;
+
+typedef enum e_bool
+{
+	false,
+	true
+}	t_bool;
 
 /*
  * Memory related functions
@@ -78,11 +84,13 @@ char	*ft_lltoa(long long nb);
 char	*ft_lltoa_base(long long nb, const char *base);
 char	*ft_ulltoa(unsigned long long nb);
 char	*ft_ulltoa_base(unsigned long long nb, const char *base);
+float	ft_atof(const char *str);
 
 /*
  * Arithmetic functions
  */
 int		ft_iabs(int x);
+int		ft_isign(int x);
 int		ft_imax(int x, int y);
 int		ft_imin(int x, int y);
 int		ft_mod(int x, int y);
