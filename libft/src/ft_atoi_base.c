@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 18:09:12 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/01 18:19:31 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/10 08:47:48 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	ft_base_size(char *base)
 	return (i);
 }
 
-int	ft_atoi_base(char *str, char *base)
+int	ft_atoi_base(const char *str, char *base)
 {
 	int	index;
 	int	base_size;

@@ -6,13 +6,13 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:46:07 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/01 18:23:55 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/10 08:47:22 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_endswith(char *s, char *suff)
+int	ft_endswith(const char *s, const char *suff)
 {
 	int	index;
 	int	suff_len;

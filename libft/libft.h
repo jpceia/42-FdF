@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 21:27:10 by jpceia            #+#    #+#             */
-/*   Updated: 2021/09/09 03:52:36 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/10 08:48:01 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *str, char c);
 int		ft_strwc(char const *s, char c);
 int		ft_contains(char c, char const *charset);
-int		ft_startswith(char *s, char *pref);
-int		ft_endswith(char *s, char *suff);
+int		ft_startswith(const char *s, const char *pref);
+int		ft_endswith(const char *s, const char *suff);
 char	*ft_strreverse(char *s);
 char	*ft_straddc(char *s, char c);
 char	*ft_empty_string(void);
@@ -77,7 +77,7 @@ void	ft_str_array_clear(char **str_arr, int len);
  * Number <=> String conversion functions
  */
 int		ft_atoi(const char *str);
-int		ft_atoi_base(char *str, char *base);
+int		ft_atoi_base(const char *str, char *base);
 char	*ft_itoa(int n);
 long	ft_atol(const char *str);
 char	*ft_lltoa(long long nb);
