@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 20:59:41 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/02 00:28:49 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/10 09:34:45 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,29 @@
 # define MLX_UTILS_H
 
 # include "geom.h"
-# include "colors.h"
+# include "color.h"
 
-typedef struct s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+typedef	struct s_mouse
+{
+	float	x;
+	float	y;
+}	t_mouse;
+
+typedef struct s_data
+{
+	void		*mlx;
+	void		*win;
+
+	void		*img;
+	char		*addr;
+	int			width;
+	int			height;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	t_mouse		*mouse;
 }	t_data;
 
-typedef struct s_vars {
-	void	*mlx;
-	void	*win;
-}	t_vars;
-
-void	plot_pixel(t_data *data, t_point2D p, t_color color);
-void	plot_line(t_data *data, t_line2D line, t_gradient g);
+void	plot_pixel(t_data *data, t_point2D p, t_trgb trgb);
 
 #endif

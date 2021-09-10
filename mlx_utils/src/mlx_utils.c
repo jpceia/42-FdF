@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "mlx_utils.h"
+#include "geom.h"
 #include "libft.h"
 #include <stdio.h>
 
@@ -22,33 +23,36 @@
  * color completely dark. 0.5 will dim it halfway, and .25 a quarter way.
  * You get the point.
  */
-void	plot_pixel(t_data *data, t_point2D p, t_color color)
+void	plot_pixel(t_data *data, t_point2D p, t_trgb trgb)
 {
+	int		x;
+	int		y;
 	char	*dst;
 
-	dst = data->addr + ((int)(p.y + 0.5)*data->line_length
-			+ (int)(p.x + 0.5)*(data->bits_per_pixel / 8));
-	*(unsigned int *)dst += color;
+	x = (int)(p.x + 0.5);
+	y = (int)(p.y + 0.5);
+	if (x < 0 || x > data->width || y < 0 || y > data->height)
+		return;
+	dst = data->addr + (y*data->line_length + x*(data->bits_per_pixel / 8));
+	*(unsigned int *)dst += trgb;
 }
 
-void	plot_line(t_data *data, t_line2D line, t_gradient g)
+void	plot_line(t_data *data, t_line2D line, t_color color)
 {
 	int			i;
 	int			steps;
-	float		t;
+	t_trgb		trgb;
 	t_vector2D	direction;
 	t_point2D	p;
 
-	steps = ft_imax(
-			ft_iabs((int)(line.start.x - line.end.x)),
-			ft_iabs((int)(line.start.y - line.end.y)));
-	direction = point2D_subtract(line.end, line.start);
+	steps = vector2D_norm(point2D_subtract(line.q, line.p));
+	direction = point2D_subtract(line.q, line.p);
+	trgb = create_trgb(color);
 	i = 0;
 	while (i < steps)
 	{
-		t = (float)i / steps;
-		p = point2D_add(line.start, point2D_scalar_mul(direction, t));
-		plot_pixel(data, p, g.color_start + t * (g.color_end - g.color_start));
+		p = point2D_add(line.p, vector2D_scalar_mul(direction, (float)i / steps));
+		plot_pixel(data, p, trgb);
 		i++;
 	}
 }
