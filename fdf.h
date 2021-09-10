@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/10 08:32:43 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/10 11:09:21 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	grid_init(t_grid *grid, int width, int height);
 void	grid_clear(t_grid *grid);
 void	grid_parse_file(t_grid *grid, char *fname);
 void	grid_print(t_grid	*grid);
-float	grid_max(t_grid *grid);
-float	grid_min(t_grid *grid);
+float	grid_max(t_grid *grid, t_coord coord);
+float	grid_min(t_grid *grid, t_coord coord);
 float	get_nbr(char *s);
 void	ft_putfloat(float x);
 

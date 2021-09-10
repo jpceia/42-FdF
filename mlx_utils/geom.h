@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 22:50:23 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/10 08:13:35 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/10 11:06:40 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define GEOM_H
 
 # include "color.h"
+
+typedef	enum e_coord
+{
+	COORD_X,
+	COORD_Y,
+	COORD_Z
+}	t_coord;
 
 /*
  * 2D Structures
@@ -41,6 +48,7 @@ typedef struct s_line2D
 t_point2D	point2D_create(float x, float y);
 t_vector2D	point2D_subtract(t_point2D a, t_point2D b);
 t_point2D	point2D_add(t_point2D a, t_vector2D v);
+float		point2D_coord(t_point2D p, t_coord coord);
 
 t_vector2D	vector2D_scalar_mul(t_vector2D v, float l);
 t_vector2D	vector2D_unit_vector(t_vector2D v);
@@ -73,8 +81,9 @@ typedef struct s_line3D
 }	t_line3D;
 
 t_point3D	point3D_create(float x, float y, float z);
-t_vector3D	point3D_subtract(t_point3D a, t_point3D b);
-t_point3D	point3D_add(t_point3D a, t_vector3D v);
+t_vector3D	point3D_subtract(t_point3D p, t_point3D q);
+t_point3D	point3D_add(t_point3D p, t_vector3D v);
+float		point3D_coord(t_point3D p, t_coord coord);
 
 t_vector3D	vector3D_scalar_mul(t_vector3D v, float l);
 t_vector3D	vector3D_unit_vector(t_vector3D v);
