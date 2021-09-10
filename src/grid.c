@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/07 06:44:37 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/10 08:45:22 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 
 void	grid_init(t_grid *grid, int width, int height)
 {
-	int		index;
-	float	*arr;
+	int			index;
+	t_point3D	*arr;
 
-	grid->data = (float **)malloc(width * height * sizeof(**grid->data));
+	grid->data = (t_point3D **)malloc(width * height * sizeof(**grid->data));
 	if (!grid->data)
 	{
 		ft_putendl("Error allocating memory to grid");
@@ -29,7 +29,7 @@ void	grid_init(t_grid *grid, int width, int height)
 	index = 0;
 	while (index < height)
 	{
-		arr = (float *)malloc(width * sizeof(*arr));
+		arr = (t_point3D *)malloc(width * sizeof(*arr));
 		if (!arr)
 		{
 			ft_putendl_error("Error assigning memory to array");
@@ -63,15 +63,15 @@ float	grid_max(t_grid *grid)
 	int		i;
 	int		j;
 
-	v = grid->data[0][0];
+	v = grid->data[0][0].z;
 	i = 0;
 	while (i < grid->height)
 	{
 		j = 0;
 		while (j < grid->width - 1)
 		{
-			if (v < grid->data[i][j])
-				v = grid->data[i][j];
+			if (v < grid->data[i][j].z)
+				v = grid->data[i][j].z;
 			j++;
 		}
 		i++;
@@ -85,18 +85,39 @@ float	grid_min(t_grid *grid)
 	int		i;
 	int		j;
 
-	v = grid->data[0][0];
+	v = grid->data[0][0].z;
 	i = 0;
 	while (i < grid->height)
 	{
 		j = 0;
 		while (j < grid->width - 1)
 		{
-			if (v > grid->data[i][j])
-				v = grid->data[i][j];
+			if (v > grid->data[i][j].z)
+				v = grid->data[i][j].z;
 			j++;
 		}
 		i++;
 	}
 	return (v);
+}
+
+void	grid_print(t_grid *grid)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < grid->height)
+	{
+		j = 0;
+		while (j < grid->width - 1)
+		{
+			ft_putfloat(grid->data[i][j].z);
+			ft_putchar('\t');
+			j++;
+		}
+		ft_putnbr(grid->data[i][grid->width - 1].z);
+		ft_putchar('\n');
+		i++;
+	}
 }

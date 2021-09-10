@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 18:33:58 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/07 06:45:51 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/10 08:33:22 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static int	grid_append_line(float *arr, int N, char *line)
+static int	grid_append_line(int line_nr, int N, char *line, t_point3D *arr)
 {
 	char	**s_split;
 	int		index;
@@ -36,7 +36,7 @@ static int	grid_append_line(float *arr, int N, char *line)
 	index = 0;
 	while (index < N)
 	{
-		arr[index] = get_nbr(s_split[index]);
+		arr[index] = point3D_create(line_nr, index, get_nbr(s_split[index]));
 		index++;
 	}
 	ft_str_array_clear(s_split, N);
@@ -55,9 +55,10 @@ static void	list_to_grid(t_grid *grid, t_list *lst)
 	status = 0;
 	while (node && status != -1)
 	{
-		status = grid_append_line(grid->data[index++],
-				grid->width, node->content);
+		status = grid_append_line(
+				index, grid->width, node->content, grid->data[index]);
 		node = node->next;
+		index++;
 	}
 	ft_lstclear(&lst, free);
 	if (status == -1)
@@ -87,23 +88,3 @@ void	grid_parse_file(t_grid *grid, char *fname)
 	list_to_grid(grid, lst);
 }
 
-void	grid_print(t_grid	*grid)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < grid->height)
-	{
-		j = 0;
-		while (j < grid->width - 1)
-		{
-			ft_putfloat(grid->data[i][j]);
-			ft_putchar('\t');
-			j++;
-		}
-		ft_putnbr(grid->data[i][grid->width - 1]);
-		ft_putchar('\n');
-		i++;
-	}
-}

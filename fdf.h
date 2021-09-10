@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/07 04:54:20 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/10 08:32:43 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FDF_H
 
 # include <string.h>
+# include "mlx_utils.h"
 
 # define WIN_TITLE  "42 - FDF"
 # define WIN_WIDTH  640
@@ -21,7 +22,7 @@
 
 typedef struct s_grid
 {
-	float	**data;
+	t_point3D	**data;
 	int		width;
 	int		height;
 }	t_grid;
