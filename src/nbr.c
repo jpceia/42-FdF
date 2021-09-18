@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 19:06:13 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/10 10:52:18 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/10 10:56:52 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 float	get_nbr_unsigned(const char *str);
 
-static float get_nbr_frac(const char *str)
+static float	get_nbr_frac(const char *str)
 {
 	int		index;
 	int		base_size;
@@ -74,8 +74,6 @@ float	get_nbr(const char *str)
 	return (sgn * get_nbr_unsigned(str));
 }
 
-
-// OK
 char	*ftoa(float	x)
 {
 	int		i;

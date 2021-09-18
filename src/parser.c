@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 18:33:58 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/10 08:33:22 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/17 09:46:43 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static int	grid_append_line(int line_nr, int N, char *line, t_point3D *arr)
+static int	grid_append_line(int line_nr, int N, char *line, t_vec3D *arr)
 {
 	char	**s_split;
 	int		index;
@@ -36,7 +36,7 @@ static int	grid_append_line(int line_nr, int N, char *line, t_point3D *arr)
 	index = 0;
 	while (index < N)
 	{
-		arr[index] = point3D_create(line_nr, index, get_nbr(s_split[index]));
+		arr[index] = vec3D_create(line_nr, index, get_nbr(s_split[index]));
 		index++;
 	}
 	ft_str_array_clear(s_split, N);
@@ -87,4 +87,3 @@ void	grid_parse_file(t_grid *grid, char *fname)
 	close(fd);
 	list_to_grid(grid, lst);
 }
-

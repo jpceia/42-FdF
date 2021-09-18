@@ -6,21 +6,20 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/10 11:12:07 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/17 10:47:10 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
-#include "geom.h"
 #include <stdlib.h>
 
 void	grid_init(t_grid *grid, int width, int height)
 {
 	int			index;
-	t_point3D	*arr;
+	t_vec3D	*arr;
 
-	grid->data = (t_point3D **)malloc(width * height * sizeof(**grid->data));
+	grid->data = (t_vec3D **)malloc(width * height * sizeof(**grid->data));
 	if (!grid->data)
 	{
 		ft_putendl("Error allocating memory to grid");
@@ -29,7 +28,7 @@ void	grid_init(t_grid *grid, int width, int height)
 	index = 0;
 	while (index < height)
 	{
-		arr = (t_point3D *)malloc(width * sizeof(*arr));
+		arr = (t_vec3D *)malloc(width * sizeof(*arr));
 		if (!arr)
 		{
 			ft_putendl_error("Error assigning memory to array");
@@ -64,14 +63,14 @@ float	grid_max(t_grid *grid, t_coord coord)
 	int		i;
 	int		j;
 
-	v_max = point3D_coord(grid->data[0][0], coord);
+	v_max = vec3D_coord(grid->data[0][0], coord);
 	i = 0;
 	while (i < grid->height)
 	{
 		j = 0;
 		while (j < grid->width - 1)
 		{
-			v = point3D_coord(grid->data[i][j], coord);
+			v = vec3D_coord(grid->data[i][j], coord);
 			if (v_max < v)
 				v_max = v;
 			j++;
@@ -88,14 +87,14 @@ float	grid_min(t_grid *grid, t_coord coord)
 	int		i;
 	int		j;
 
-	v_min = point3D_coord(grid->data[0][0], coord);
+	v_min = vec3D_coord(grid->data[0][0], coord);
 	i = 0;
 	while (i < grid->height)
 	{
 		j = 0;
 		while (j < grid->width - 1)
 		{
-			v = point3D_coord(grid->data[i][j], coord);
+			v = vec3D_coord(grid->data[i][j], coord);
 			if (v_min > v)
 				v_min = v;
 			j++;

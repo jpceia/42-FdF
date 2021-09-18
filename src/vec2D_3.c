@@ -1,53 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector3D.c                                         :+:      :+:    :+:   */
+/*   vec2D_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/07 06:48:02 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/10 07:17:16 by jceia            ###   ########.fr       */
+/*   Created: 2021/09/17 09:39:38 by jceia             #+#    #+#             */
+/*   Updated: 2021/09/17 11:27:17 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "libft.h"
-#include "mlx_utils.h"
+#include "fdf.h"
 
-t_vector3D	point3D_scalar_mul(t_vector3D v, float l)
+float	vec2D_norm_squared(t_vec2D v)
 {
-	v.x *= l;
-	v.y *= l;
-	v.z *= l;
-	return (v);
+	return (v.x * v.x + v.y * v.y);
 }
 
-t_vector3D	vector3D_unit_vector(t_vector3D v)
+float	vec2D_norm(t_vec2D v)
 {
-	return (vector3D_scalar_mul(v, 1 / vector3D_norm(v)));
+	return (sqrtf(vec2D_norm_squared(v)));
 }
 
-float	vector3D_dot_product(t_vector3D u, t_vector3D v)
-{
-	return (u.x * v.x + u.y+ v.y + u.z * v.z);
-}
-
-float	vector3D_norm(t_vector3D v)
-{
-	return sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
-}
-
-float	vector3D_angle(t_vector3D u, t_vector3D v)
+float	vec2D_angle(t_vec2D u, t_vec2D v)
 {
 	float	norm_u;
 	float	norm_v;
 	float	dot_uv;
 
-	dot_uv = vector3D_dot_product(u, v);
+	dot_uv = vec2D_dot_product(u, v);
 	if (dot_uv == 0)
 		return (0);
-	norm_u = vector3D_norm(u);
-	norm_v = vector3D_norm(v);
+	norm_u = vec2D_norm(u);
+	norm_v = vec2D_norm(v);
 	if (norm_u == 0 || norm_v == 0)
 	{
 		ft_putstr_error("Impossible to calculate angle between two vectors");
@@ -55,4 +42,27 @@ float	vector3D_angle(t_vector3D u, t_vector3D v)
 		return (-1);
 	}
 	return (dot_uv / norm_u / norm_v);
+}
+
+t_vec2D	vec2D_elementwise_product(t_vec2D u, t_vec2D v)
+{
+	u.x *= v.x;
+	u.y *= v.y;
+	return (u);
+}
+
+static float	fclip(float x, float a, float b)
+{
+	if (x < a)
+		return (a);
+	if (x > b)
+		return (b);
+	return (x);
+}
+
+t_vec2D	vec2D_clip(t_vec2D v, float a, float b)
+{
+	v.x = fclip(v.x, a, b);
+	v.y = fclip(v.y, a, b);
+	return (v);
 }
