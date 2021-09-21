@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   grid.c                                             :+:      :+:    :+:   */
+/*   grid1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/17 10:47:10 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/18 21:46:59 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,28 @@ void	grid_init(t_grid *grid, int width, int height)
 	}
 	grid->width = width;
 	grid->height = height;
+}
+
+t_grid	grid_clone(const t_grid *grid)
+{
+	int		i;
+	int		j;
+	t_grid	grid_cpy;
+
+	grid_init(&grid_cpy, grid->width, grid->height);
+
+	i = 0;
+	while (i < grid->height)
+	{
+		j = 0;
+		while (j < grid->width)
+		{
+			grid_cpy.data[i][j] = grid->data[i][j];
+			j++;
+		}
+		i++;
+	}
+	return (grid_cpy);
 }
 
 void	grid_clear(t_grid *grid)
@@ -102,25 +124,4 @@ float	grid_min(t_grid *grid, t_coord coord)
 		i++;
 	}
 	return (v_min);
-}
-
-void	grid_print(t_grid *grid)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < grid->height)
-	{
-		j = 0;
-		while (j < grid->width - 1)
-		{
-			ft_putfloat(grid->data[i][j].z);
-			ft_putchar('\t');
-			j++;
-		}
-		ft_putnbr(grid->data[i][grid->width - 1].z);
-		ft_putchar('\n');
-		i++;
-	}
 }
