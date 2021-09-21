@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 03:32:53 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/02 02:52:58 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/21 16:59:37 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,32 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "fdf.h"
-#include "geom.h"
-#include "mlx_utils.h"
 #include <stdio.h>
 #include <mlx.h>
+#include <math.h>
 
-int	win_close(int keycode, t_vars *vars)
+int	win_close(int keycode, t_mlx *vars)
 {
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(EXIT_SUCCESS);
 	}
-	return (0);	
+	return (0);
 }
+
+// TODO transform points
+// TODO color gradient (test)
+// TODO camera coordinates
+// TODO draw grid
+// TODO zoom w/ scroll
+// TODO translation w/ mouse movement
 
 int	main(int argc, char **argv)
 {
+	t_camera cam;
 	t_grid	grid;
+	t_matrix	*M;
 
 	if (argc != 2)
 	{
@@ -40,54 +48,30 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	grid_parse_file(&grid, argv[1]);
+	grid_print(&grid);
 
-	t_vars	vars;
-	t_data	img;
+	M = matrix_homogenous_translation(vec3D_create(-0.5 * (grid.width - 1), -0.5 * (grid.height - 1), 0.0));
+	M = matrix_add(M, matrix_homogeneous_from3x3(matrix_rotation_euler(M_PI / 6, 0.0, 0.0), true), true);
+	cam.screen_size.x = WIN_WIDTH;
+	cam.screen_size.y = WIN_HEIGHT;
+	cam.scaling = fminf(
+		cam.screen_size.x / (fabsf(matrix_at(M, 0, 0)) * grid.width + fabsf(matrix_at(M, 0, 1)) * grid.height),
+		cam.screen_size.y / (fabsf(matrix_at(M, 1, 0)) * grid.width + fabsf(matrix_at(M, 1, 1)) * grid.height)
+	);
+	matrix_clear(M);
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
-	img.img = mlx_new_image(vars.mlx, WIN_WIDTH, WIN_HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
-
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	t_mlx	data;
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
+	data.img = mlx_new_image(data.mlx, WIN_WIDTH, WIN_HEIGHT);
+	data.addr = mlx_get_mlx_addr(data.img, &data.bits_per_pixel, &data.line_length,
+								&data.endian);
+	grid_draw(&data, &cam, &grid, vec3D_create(1.0, 1.0, 1.0));
+	
+	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
 	//mlx_hook(vars.win, 2, 1L<<0, win_close, &vars);
-	mlx_key_hook(vars.win, win_close, &vars);
-
-	//grid_print(&grid);
-	t_gradient g;
-	t_color color_start =	0x00FFFFFF;
-	t_color	color_end =		0x000000FF;
-
-	double g_max = grid_max(&grid);
-	double g_min = grid_min(&grid);
-	float scale_src = ft_imax(grid.height, grid.width);
-	scale_src = ft_imax(scale_src, g_max - g_min);
-	float scale_dest = ft_imax(WIN_HEIGHT, WIN_WIDTH);
-
-	for (int i = 0; i < grid.height - 1; i++)
-	{
-		for (int j = 0; j < grid.width - 1; j++)
-		{
-			t_line2D line;
-			printf("%d %d\n", i, j);
-			line.start	= proj_isometric(point3D_create(i / scale_src, j/ scale_src, (grid.data[i][j] - g_min) / scale_src));
-			line.end	= proj_isometric(point3D_create(i / scale_src, (j+1)/ scale_src , (grid.data[i][j+1] - g_min) / scale_src));
-			printf("(%f, %f) -> (%f, %f)\n", line.start.x, line.start.y, line.end.x, line.end.y);
-			line.start	= scale_2D(translation_2D(line.start,	point2D_create(SQRT_2, .1)), .5 * scale_dest, -.5 * scale_dest);
-			line.end	= scale_2D(translation_2D(line.end,		point2D_create(SQRT_2, .1)), .5 * scale_dest, -.5 * scale_dest);
-			line.start	= translation_2D(line.start,	point2D_create(0, WIN_HEIGHT));
-			line.end	= translation_2D(line.end,		point2D_create(0, WIN_HEIGHT));
-			printf("(%f, %f) -> (%f, %f)\n", line.start.x, line.start.y, line.end.x, line.end.y);
-			g.color_start = color_start + (color_end - color_start) * (grid.data[i][j] - g_min) / scale_src;
-			g.color_end = color_start + (color_end - color_start) * (grid.data[i][j+1] - g_min) / scale_src;
-			plot_line(&img, line, g);
-		}
-	}
-	
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	mlx_key_hook(data.win, win_close, &data);
 	grid_clear(&grid);
-	mlx_loop(vars.mlx);
+	mlx_loop(data.mlx);
 
-	
 }

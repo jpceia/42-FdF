@@ -22,7 +22,7 @@
  * color completely dark. 0.5 will dim it halfway, and .25 a quarter way.
  * You get the point.
  */
-void	plot_pixel(t_data *data, float x, float y, t_rgb color)
+void	plot_pixel(t_mlx *data, float x, float y, t_rgb color)
 {
 	int		i;
 	int		j;
@@ -36,7 +36,7 @@ void	plot_pixel(t_data *data, float x, float y, t_rgb color)
 	*(unsigned int *)dst += create_trgb(color);
 }
 
-void	plot_line(t_data *data, t_vec2D p, t_vec2D q, t_rgb color)
+void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_rgb color)
 {
 	int		i;
 	int		steps;
@@ -54,24 +54,70 @@ void	plot_line(t_data *data, t_vec2D p, t_vec2D q, t_rgb color)
 	}
 }
 
-t_camera	camera_build(t_vec3D orig, t_vec3D direction)
+
+void	grid_camera_transform(t_grid *grid, const t_camera *cam)
 {
-	t_vec3D	up_vec;
-	t_camera	cam;
+	t_matrix	*M;
 
-	cam.orig = orig;
-	cam.direction = vec3D_normalize(direction);
+	M = matrix_homogenous_translation(vec3D_create(-0.5 * (grid->width - 1), -0.5 * (grid->height - 1), 0.0));
+	M = matrix_mul(M, matrix_scaling3D(vec3D_create(cam->scaling, cam->scaling, 0.0)), true);
+	M = matrix_mul(M, matrix3x3_euler_rotation(M_PI / 8, M_PI / 4, 0.0), true);
+	grid_apply_transformation(grid, M);
+	matrix_clear(M);
+}
 
-	if (cam.direction.y == 1.0)
-		up_vec = vec3D_create(0.0, 0.0, 1.0);
-	else
-		up_vec = vec3D_create(0.0, -1.0, 0.0);
-	cam.v_x = vec3D_cross_product(cam.direction, up_vec);
-	cam.v_y = vec3D_cross_product(cam.direction, cam.v_x);
-	// offset_x
-	// offset_y
-	// width
-	// height
+void grid_draw_horizontal(t_mlx *data, const t_grid *grid, t_rgb color)
+{
+	t_vec2D	p;
+	t_vec2D	q;
+	int		i;
+	int		j;
 
-	return (cam);
+	i = 0;
+	while (i < grid->height)
+	{
+		j = 0;
+		while (j < grid->width - 1)
+		{
+			p.x = grid->data[i][j].x;
+			p.y = grid->data[i][j].y;
+			q.x = grid->data[i][j+1].x;
+			q.y = grid->data[i][j+1].y;
+			plot_line(data, p, q, color);
+			j++;
+		}
+	}
+}
+
+void grid_draw_vertical(t_mlx *data, const t_grid *grid, t_rgb color)
+{
+	t_vec2D	p;
+	t_vec2D	q;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < grid->height - 1)
+	{
+		j = 0;
+		while (j < grid->width)
+		{
+			p.x = grid->data[i][j].x;
+			p.y = grid->data[i][j].y;
+			q.x = grid->data[i+1][j].x;
+			q.y = grid->data[i+1][j].y;
+			plot_line(data, p, q, color);
+			j++;
+		}
+	}
+}
+
+void	grid_draw(t_mlx *data, const t_camera *cam, const t_grid *grid, t_rgb color)
+{
+	t_grid	grid_cpy;
+
+	grid_cpy = grid_clone(grid);
+	grid_camera_transform(&grid_cpy, cam);
+	grid_draw_horizontal(data, &grid_cpy, color);
+	grid_draw_vertical(data, &grid_cpy, color);
 }
