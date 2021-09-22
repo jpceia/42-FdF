@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/21 16:59:24 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/21 17:12:05 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_data
 	int			line_length;
 	int			endian;
 	t_mouse		*mouse;
+	t_camera	*cam;
 }	t_mlx;
 
 void	plot_pixel(t_mlx *data, float x, float y, t_rgb color);

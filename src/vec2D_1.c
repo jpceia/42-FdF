@@ -6,11 +6,11 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 22:32:05 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/17 11:33:11 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/21 17:50:14 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "vec.h"
 #include "libft.h"
 
 t_vec2D	vec2D_create(float x, float y)

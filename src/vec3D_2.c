@@ -6,13 +6,13 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 06:48:02 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/17 10:19:53 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/21 17:49:52 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "libft.h"
-#include "fdf.h"
+#include "vec.h"
 
 t_vec3D	vec3D_scalar_mul(t_vec3D v, float l)
 {

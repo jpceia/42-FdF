@@ -6,13 +6,13 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 09:39:38 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/17 10:46:39 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/21 17:52:21 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "libft.h"
-#include "fdf.h"
+#include "vec.h"
 
 float	vec3D_norm_squared(t_vec3D v)
 {
@@ -52,19 +52,10 @@ t_vec3D	vec3D_elementwise_product(t_vec3D u, t_vec3D v)
 	return (u);
 }
 
-static float	fclip(float x, float a, float b)
-{
-	if (x < a)
-		return (a);
-	if (x > b)
-		return (b);
-	return (x);
-}
-
 t_vec3D	vec3D_clip(t_vec3D v, float a, float b)
 {
-	v.x = fclip(v.x, a, b);
-	v.y = fclip(v.y, a, b);
-	v.z = fclip(v.z, a, b);
+	v.x = fminf(fmaxf(v.x, a), b);
+	v.y = fminf(fmaxf(v.y, a), b);
+	v.z = fminf(fmaxf(v.z, a), b);
 	return (v);
 }

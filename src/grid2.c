@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/21 16:27:56 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/21 17:15:09 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ void	grid_print(t_grid *grid)
 	}
 }
 
-void	grid_apply4x4(t_grid *grid, t_matrix *M)
+void	grid_apply_transformation(t_grid *grid, t_matrix *M)
 {
 	int		i;
 	int		j;
-	t_vec3D	p;
-
 	i = 0;
 	while (i < grid->height)
 	{

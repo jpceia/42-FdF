@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 07:57:48 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/21 16:24:43 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/21 17:39:51 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <stdio.h>
 #include "matrix.h"
 #include "fdf.h"
-
-
 
 t_matrix	*matrix3x3_rotationX(float theta)
 {

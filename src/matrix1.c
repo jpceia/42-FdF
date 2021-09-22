@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:17:16 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/21 16:18:02 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/21 17:48:44 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 t_matrix	*matrix_empty(int ncols, int nrows)
 {
-    t_matrix	*M;
+	t_matrix	*M;
 
-	if (ncols <= 0 | nrows <= 0)
+	if (ncols <= 0 || nrows <= 0)
 		return (NULL);
 	M = (t_matrix *)malloc(sizeof(*M));
 	if (!M)
 		return (M);
-    M->data = (float *)malloc(ncols * nrows * sizeof(*(M->data)));
+	M->data = (float *)malloc(ncols * nrows * sizeof(*(M->data)));
 	if (!M->data)
 	{
 		free(M);
@@ -32,8 +32,10 @@ t_matrix	*matrix_empty(int ncols, int nrows)
 
 void	matrix_clear(t_matrix *M)
 {
-	free(M->data);
-	free(M);
+	if (M && M->data)
+		free(M->data);
+	if (M)
+		free(M);
 }
 
 t_matrix	*matrix_zeros(int ncols, int nrows)
@@ -50,8 +52,13 @@ t_matrix	*matrix_zeros(int ncols, int nrows)
 	return (M);
 }
 
-float		matrix_at(t_matrix *A, int i, int j)
+float	matrix_at(t_matrix *A, int i, int j)
 {
+	if (!A)
+	{
+		ft_putendl_error("NULL ptr");
+		return (NAN);
+	}
 	if (i < 0 || i >= A->nrows)
 	{
 		ft_putendl_error("Row index outside range");
@@ -68,8 +75,10 @@ float		matrix_at(t_matrix *A, int i, int j)
 void	matrix_print(t_matrix *M)
 {
 	int	i;
-	int j;
+	int	j;
 
+	if (!M)
+		return ;
 	i = 0;
 	while (i < M->nrows)
 	{
