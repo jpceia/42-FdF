@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 02:53:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/21 17:17:14 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/22 17:47:10 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,9 @@
 
 t_trgb	create_trgb(t_vec3D color)
 {
+	color = vec3D_clip(color, 0.0, 1.0);
 	return (
 		((int)(255 * color.x)) << 16
 	| ((int)(255 * color.y)) << 8
 	| ((int)(255 * color.z)));
-}
-
-t_rgb	color_create(float r, float g, float b)
-{
-	t_rgb color;
-
-	color.x = r;
-	color.y = g;
-	color.z = b;
-	return (color);
 }

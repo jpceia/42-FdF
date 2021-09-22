@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:23:36 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/21 16:24:25 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/22 16:50:27 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ float	vec2D_dot_product(t_vec2D u, t_vec2D v);
 float	vec2D_norm_squared(t_vec2D v);
 float	vec2D_norm(t_vec2D v);
 float	vec2D_angle(t_vec2D u, t_vec2D v);
+t_vec2D	vec2D_clip(t_vec2D v, float a, float b);
 /*
  * vec3D
  */
@@ -76,5 +77,6 @@ float	vec3D_dot_product(t_vec3D u, t_vec3D v);
 float	vec3D_norm_squared(t_vec3D v);
 float	vec3D_norm(t_vec3D v);
 float	vec3D_angle(t_vec3D u, t_vec3D v);
+t_vec3D	vec3D_clip(t_vec3D v, float a, float b);
 
 #endif

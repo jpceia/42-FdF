@@ -6,23 +6,25 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:17:16 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/21 17:48:44 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/22 10:25:47 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
 
-t_matrix	*matrix_empty(int ncols, int nrows)
+t_matrix	*matrix_empty(int nrows, int ncols)
 {
 	t_matrix	*M;
 
-	if (ncols <= 0 || nrows <= 0)
+	if (nrows <= 0 || ncols <= 0)
 		return (NULL);
 	M = (t_matrix *)malloc(sizeof(*M));
+	M->nrows = nrows;
+	M->ncols = ncols;
 	if (!M)
 		return (M);
-	M->data = (float *)malloc(ncols * nrows * sizeof(*(M->data)));
-	if (!M->data)
+	M->data = (float *)malloc(nrows * ncols * sizeof(*(M->data)));
+	if (!(M->data))
 	{
 		free(M);
 		return (NULL);
@@ -32,22 +34,25 @@ t_matrix	*matrix_empty(int ncols, int nrows)
 
 void	matrix_clear(t_matrix *M)
 {
-	if (M && M->data)
-		free(M->data);
 	if (M)
+	{
+		if (M->data)
+			free(M->data);
 		free(M);
+		M = NULL;
+	}
 }
 
-t_matrix	*matrix_zeros(int ncols, int nrows)
+t_matrix	*matrix_zeros(int nrows, int ncols)
 {
 	int			idx;
 	t_matrix	*M;
 
-	M = matrix_empty(ncols, nrows);
+	M = matrix_empty(nrows, ncols);
 	if (!M)
 		return (NULL);
 	idx = 0;
-	while (idx < ncols * nrows)
+	while (idx < nrows * ncols)
 		M->data[idx++] = 0;
 	return (M);
 }
