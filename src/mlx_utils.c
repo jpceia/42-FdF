@@ -66,7 +66,7 @@ void	grid_camera_transform(t_grid *grid, const t_camera *cam)
 	matrix_clear(M);
 }
 
-void grid_draw_horizontal(t_mlx *data, const t_grid *grid, t_rgb color)
+void	grid_draw_horizontal(t_mlx *data, const t_grid *grid, t_rgb color)
 {
 	t_vec2D	p;
 	t_vec2D	q;
@@ -81,15 +81,16 @@ void grid_draw_horizontal(t_mlx *data, const t_grid *grid, t_rgb color)
 		{
 			p.x = grid->data[i][j].x;
 			p.y = grid->data[i][j].y;
-			q.x = grid->data[i][j+1].x;
-			q.y = grid->data[i][j+1].y;
+			q.x = grid->data[i][j + 1].x;
+			q.y = grid->data[i][j + 1].y;
 			plot_line(data, p, q, color);
 			j++;
 		}
+		i++;
 	}
 }
 
-void grid_draw_vertical(t_mlx *data, const t_grid *grid, t_rgb color)
+void	grid_draw_vertical(t_mlx *data, const t_grid *grid, t_rgb color)
 {
 	t_vec2D	p;
 	t_vec2D	q;
@@ -104,15 +105,17 @@ void grid_draw_vertical(t_mlx *data, const t_grid *grid, t_rgb color)
 		{
 			p.x = grid->data[i][j].x;
 			p.y = grid->data[i][j].y;
-			q.x = grid->data[i+1][j].x;
-			q.y = grid->data[i+1][j].y;
+			q.x = grid->data[i + 1][j].x;
+			q.y = grid->data[i + 1][j].y;
 			plot_line(data, p, q, color);
 			j++;
 		}
+		i++;
 	}
 }
 
-void	grid_draw(t_mlx *data, const t_camera *cam, const t_grid *grid, t_rgb color)
+void	grid_draw(t_mlx *data, const t_camera *cam,
+		const t_grid *grid, t_rgb color)
 {
 	t_grid	grid_cpy;
 
