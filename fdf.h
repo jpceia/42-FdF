@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/22 17:46:47 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/24 14:53:53 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct s_camera
 {
 	t_vec3D			translation;
 	t_euler_angles	euler_angles;
-	t_vec2D			screen_size;
 	t_vec2D			offset;
 	float			scaling;
 }	t_camera;

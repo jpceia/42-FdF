@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/24 14:18:38 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/24 14:29:28 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	grid_apply_transformation(t_grid *grid, t_matrix *M)
 	}
 }
 
-void	grid_camera_transform(t_grid *grid, const t_camera *cam)
+void	grid_camera_transform(t_grid *grid, const t_camera *cam, int width, int height)
 {
 	t_matrix	*T;	
 	t_matrix	*S;
@@ -47,7 +47,7 @@ void	grid_camera_transform(t_grid *grid, const t_camera *cam)
 	M = matrix_mul(R, T, true);
 	M = matrix_mul(S, M, true);
 	T = matrix_homogenous_translation(
-			vec3D_create(cam->screen_size.x / 2, cam->screen_size.y / 2, 0.0));
+			vec3D_create(width / 2, height / 2, 0.0));
 	M = matrix_mul(T, M, true);
 	grid_apply_transformation(grid, M);
 	matrix_clear(M);
@@ -107,7 +107,7 @@ void	grid_draw(t_mlx *data, const t_camera *cam,
 	t_grid	grid_cpy;
 
 	grid_cpy = grid_clone(grid);
-	grid_camera_transform(&grid_cpy, cam);
+	grid_camera_transform(&grid_cpy, cam, data->width, data->height);
 	grid_draw_horizontal(data, &grid_cpy, color);
 	grid_draw_vertical(data, &grid_cpy, color);
 }
