@@ -54,14 +54,23 @@ void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_rgb color)
 	}
 }
 
-
 void	grid_camera_transform(t_grid *grid, const t_camera *cam)
 {
+	t_matrix	*T;	
+	t_matrix	*S;
+	t_matrix	*R;
 	t_matrix	*M;
 
-	M = matrix_homogenous_translation(vec3D_create(-0.5 * (grid->width - 1), -0.5 * (grid->height - 1), 0.0));
-	M = matrix_mul(M, matrix_scaling3D(vec3D_create(cam->scaling, cam->scaling, 0.0)), true);
-	M = matrix_mul(M, matrix3x3_euler_rotation(M_PI / 8, M_PI / 4, 0.0), true);
+	T = matrix_homogenous_translation(cam->translation);
+	R = matrix3x3_euler_rotation(cam->euler_angles);
+	R = matrix_homogeneous_from3x3(R, true);
+	S = matrix_scaling3D(vec3D_create(cam->scaling, -cam->scaling, 0.0));
+	S = matrix_homogeneous_from3x3(S, true);
+	M = matrix_mul(R, T, true);
+	M = matrix_mul(S, M, true);
+	T = matrix_homogenous_translation(
+			vec3D_create(cam->screen_size.x / 2, cam->screen_size.y / 2, 0.0));
+	M = matrix_mul(T, M, true);
 	grid_apply_transformation(grid, M);
 	matrix_clear(M);
 }
