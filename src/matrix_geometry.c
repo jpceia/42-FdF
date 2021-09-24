@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 07:16:53 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/21 17:41:55 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/24 14:17:51 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_vec3D	matrix_mul_vec3D(t_matrix *M, t_vec3D p)
 {
 	t_vec3D	q;
 
+	if (!M)
+		return (vec3D_origin());
 	if (!check_matrix_ncols(M->ncols, 3) || !check_matrix_nrows(M->nrows, 3))
 		return (vec3D_origin());
 	q.x = M->data[0] * p.x + M->data[1] * p.y + M->data[2] * p.z;
@@ -43,6 +45,8 @@ t_matrix	*matrix_homogeneous_from3x3(t_matrix *A, t_bool do_free)
 {
 	t_matrix	*M;
 
+	if (!A)
+		return (NULL);
 	if (!check_matrix_ncols(A->ncols, 3) || !check_matrix_nrows(A->nrows, 3))
 		return (NULL);
 	M = matrix_zeros(4, 4);
@@ -85,6 +89,8 @@ t_vec3D	matrix_homogenous_mul_vec3D(t_matrix *M, t_vec3D p)
 	float	w;
 	t_vec3D	q;
 
+	if (!M)
+		return (vec3D_origin());
 	if (!check_matrix_ncols(M->ncols, 4) || !check_matrix_nrows(M->nrows, 4))
 		return (vec3D_origin());
 	if (M->data[15] != 1.0)
