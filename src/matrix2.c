@@ -21,16 +21,15 @@ t_matrix	*matrix_mul(t_matrix *A, t_matrix *B, t_bool do_free)
 		return (NULL);
 	M = matrix_zeros(A->nrows, B->ncols);
 	idx[0] = -1;
-	while (idx[0]++ < A->nrows)
+	while (++idx[0] < A->nrows)
 	{
 		idx[1] = -1;
-		while (idx[1]++ < B->ncols)
+		while (++idx[1] < B->ncols)
 		{
 			idx[2] = -1;
-			while (idx[2]++ < A->ncols)
-				M->data[idx[0] * A->ncols + idx[1]]
-					+= A->data[idx[0] * A->ncols + idx[2]]
-					* B->data[idx[2] * B->ncols + idx[1]];
+			while (++idx[2] < A->ncols)
+				M->data[idx[0] * M->ncols + idx[1]] += \
+					matrix_at(A, idx[0], idx[2]) * matrix_at(B, idx[2], idx[1]);
 		}
 	}
 	if (do_free)
@@ -55,12 +54,11 @@ t_matrix	*matrix_add(t_matrix *A, t_matrix *B, t_bool do_free)
 		return (NULL);
 	M = matrix_empty(A->nrows, A->ncols);
 	i = -1;
-	while (i++ < A->nrows)
+	while (++i < A->nrows)
 	{
 		j = -1;
-		while (j++ < B->ncols)
-			M->data[i * A->ncols + j] = A->data[i * A->ncols + j]
-				* B->data[i * B->ncols + j];
+		while (++j < B->ncols)
+			M->data[i * A->ncols + j] = matrix_at(A, i, j) * matrix_at(B, i, j);
 	}
 	if (do_free)
 	{
