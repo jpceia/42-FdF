@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:18:41 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/22 17:40:27 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/24 15:53:26 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,29 @@ t_matrix	*matrix_add(t_matrix *A, t_matrix *B, t_bool do_free)
 	if (do_free)
 		matrix_pair_clear(A, B);
 	return (M);
+}
+
+t_matrix	*matrix_transpose(t_matrix	*M, t_bool do_free)
+{
+	int			i;
+	int			j;
+	t_matrix	*M_T;
+
+	if (!M)
+		return (NULL);
+	M_T = matrix_empty(M->ncols, M->nrows);
+	i = 0;
+	while (i < M->nrows)
+	{
+		j = 0;
+		while (j < M->ncols)
+		{
+			M_T->data[j * M->nrows + i] = M->data[i * M->ncols + j];
+			j++;
+		}
+		i++;
+	}
+	if (do_free)
+		matrix_clear(M);
+	return (M_T);
 }

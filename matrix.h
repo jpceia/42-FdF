@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 15:23:30 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/22 17:45:13 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/24 15:51:12 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void			matrix_print(t_matrix *M);
 
 t_matrix		*matrix_mul(t_matrix *A, t_matrix *B, t_bool do_free);
 t_matrix		*matrix_add(t_matrix *A, t_matrix *B, t_bool do_free);
+t_matrix		*matrix_transpose(t_matrix	*M, t_bool do_free);
 
 t_matrix		*matrix3x3_rotationX(float theta);
 t_matrix		*matrix3x3_rotationY(float theta);
