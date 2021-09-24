@@ -40,8 +40,8 @@ t_matrix	*matrix3x3_rotationY(float theta)
 	M->data[0] = cos(theta);
 	M->data[2] = sin(theta);
 	M->data[4] = 1.0;
-	M->data[7] = -sin(theta);
-	M->data[9] = cos(theta);
+	M->data[6] = -sin(theta);
+	M->data[8] = cos(theta);
 	return (M);
 }
 
