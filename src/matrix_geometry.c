@@ -76,8 +76,11 @@ t_matrix	*matrix_homogenous_translation(t_vec3D v)
 	M = matrix_zeros(4, 4);
 	if (!M)
 		return (NULL);
+	M->data[0] = 1.0;
 	M->data[3] = v.x;
+	M->data[5] = 1.0;
 	M->data[7] = v.y;
+	M->data[10] = 1.0;
 	M->data[11] = v.z;
 	M->data[15] = 1.0;
 	return (M);
