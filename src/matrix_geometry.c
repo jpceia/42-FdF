@@ -18,17 +18,11 @@ t_matrix	*matrix_scaling3D(t_vec3D s)
 {
 	t_matrix	*M;
 
-	M = matrix_empty(3, 3);
+	M = matrix_zeros(3, 3);
 	if (!M)
 		return (NULL);
 	M->data[0] = s.x;
-	M->data[1] = 0.0;
-	M->data[2] = 0.0;
-	M->data[3] = 0.0;
 	M->data[4] = s.y;
-	M->data[5] = 0.0;
-	M->data[6] = 0.0;
-	M->data[7] = 0.0;
 	M->data[8] = s.z;
 	return (M);
 }
