@@ -93,12 +93,13 @@ t_vec3D	matrix_homogenous_mul_vec3D(t_matrix *M, t_vec3D p)
 
 	if (!check_matrix_ncols(M->ncols, 4) || !check_matrix_nrows(M->nrows, 4))
 		return (vec3D_origin());
-	if (M->data[12] != 1.0)
+	if (M->data[15] != 1.0)
 	{
 		ft_putendl_error("Non homogeous matrix (M_44 != 1)");
 		return (vec3D_origin());
 	}
-	w = M->data[12] * p.x + M->data[12] * p.y + M->data[12] * p.z;
+	w = M->data[12] * p.x + M->data[13] * p.y
+		+ M->data[14] * p.z + M->data[15];
 	q.x = (M->data[0] * p.x + M->data[1] * p.y
 			+ M->data[2] * p.z + M->data[3]) / w;
 	q.y = (M->data[4] * p.x + M->data[5] * p.y
