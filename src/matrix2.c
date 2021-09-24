@@ -6,11 +6,17 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:18:41 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/21 17:47:23 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/22 17:40:27 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
+
+void	matrix_pair_clear(t_matrix *A, t_matrix *B)
+{
+	matrix_clear(A);
+	matrix_clear(B);
+}
 
 t_matrix	*matrix_mul(t_matrix *A, t_matrix *B, t_bool do_free)
 {
@@ -33,10 +39,7 @@ t_matrix	*matrix_mul(t_matrix *A, t_matrix *B, t_bool do_free)
 		}
 	}
 	if (do_free)
-	{
-		matrix_clear(A);
-		matrix_clear(B);
-	}
+		matrix_pair_clear(A, B);
 	return (M);
 }
 
@@ -61,9 +64,6 @@ t_matrix	*matrix_add(t_matrix *A, t_matrix *B, t_bool do_free)
 			M->data[i * A->ncols + j] = matrix_at(A, i, j) * matrix_at(B, i, j);
 	}
 	if (do_free)
-	{
-		matrix_clear(A);
-		matrix_clear(B);
-	}
+		matrix_pair_clear(A, B);
 	return (M);
 }
