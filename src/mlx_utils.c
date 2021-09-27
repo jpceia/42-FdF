@@ -29,7 +29,7 @@ void	plot_pixel(t_mlx *data, float x, float y, t_rgb color)
 	char	*dst;
 
 	i = (int)(x + 0.5);
-	j = (int)(y + 0.5);
+	j = (int)(data->height - y + 0.5);
 	if (i < 0 || i > data->width || j < 0 || j > data->height)
 		return ;
 	dst = data->addr + (j * data->line_length + i * (data->bits_per_pixel / 8));
@@ -46,7 +46,7 @@ void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_rgb color)
 	steps = vec2D_norm(vec2D_subtract(q, p));
 	direction = vec2D_subtract(q, p);
 	i = 0;
-	while (i < steps)
+	while (i < steps + 1)
 	{
 		r = vec2D_add(p, vec2D_scalar_mul(direction, (float)i / steps));
 		plot_pixel(data, r.x, r.y, color);
