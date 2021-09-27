@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 07:57:48 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/24 13:47:32 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/24 15:54:57 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_matrix	*matrix3x3_euler_rotation(t_euler_angles e)
 	t_matrix	*M;
 
 	M = matrix3x3_rotationZ(e.yaw);
-	M = matrix_mul(matrix3x3_rotationY(e.pitch), M, true);
-	M = matrix_mul(matrix3x3_rotationZ(e.roll), M, true);
+	M = matrix_mul(matrix3x3_rotationX(e.pitch), M, true);
+	M = matrix_mul(matrix3x3_rotationY(e.roll), M, true);
 	return (M);
 }

@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/24 14:53:53 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/24 16:05:03 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,6 @@ typedef struct s_camera
 	t_vec2D			offset;
 	float			scaling;
 }	t_camera;
-
-void	camera_set_params(t_camera *cam, const t_grid *grid,
-			int screen_width, int screen_height);
 
 typedef struct s_data
 {
