@@ -22,7 +22,7 @@
  * color completely dark. 0.5 will dim it halfway, and .25 a quarter way.
  * You get the point.
  */
-void	plot_pixel(t_mlx *data, float x, float y, t_rgb color)
+void	plot_pixel(t_mlx *data, float x, float y, t_vec3D color)
 {
 	int		i;
 	int		j;
@@ -36,7 +36,7 @@ void	plot_pixel(t_mlx *data, float x, float y, t_rgb color)
 	*(unsigned int *)dst += create_trgb(color);
 }
 
-void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_rgb color)
+void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_vec3D color)
 {
 	int		i;
 	int		steps;

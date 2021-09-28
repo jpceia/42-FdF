@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/24 16:05:03 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/29 00:45:39 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@
  * Color
  */
 
-typedef t_vec3D	t_rgb;
 typedef int		t_trgb;
 
-int		create_trgb(t_rgb color);
+int		create_trgb(t_vec3D color);
 
 /*
  * Grid Utils
@@ -84,9 +83,9 @@ typedef struct s_data
 	t_camera	*cam;
 }	t_mlx;
 
-void	plot_pixel(t_mlx *data, float x, float y, t_rgb color);
-void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_rgb color);
+void	plot_pixel(t_mlx *data, float x, float y, t_vec3D color);
+void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_vec3D color);
 void	grid_draw(t_mlx *data, const t_camera *cam,
-			const t_grid *grid, t_rgb color);
+			const t_grid *grid, t_vec3D color);
 
 #endif

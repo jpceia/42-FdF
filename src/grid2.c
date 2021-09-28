@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/24 16:08:45 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/29 00:45:37 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	grid_camera_transform(t_grid *grid, const t_camera *cam)
 	matrix_clear(M);
 }
 
-void	grid_draw_horizontal(t_mlx *data, const t_grid *grid, t_rgb color)
+void	grid_draw_horizontal(t_mlx *data, const t_grid *grid, t_vec3D color)
 {
 	t_vec2D	p;
 	t_vec2D	q;
@@ -77,7 +77,7 @@ void	grid_draw_horizontal(t_mlx *data, const t_grid *grid, t_rgb color)
 	}
 }
 
-void	grid_draw_vertical(t_mlx *data, const t_grid *grid, t_rgb color)
+void	grid_draw_vertical(t_mlx *data, const t_grid *grid, t_vec3D color)
 {
 	t_vec2D	p;
 	t_vec2D	q;
@@ -102,7 +102,7 @@ void	grid_draw_vertical(t_mlx *data, const t_grid *grid, t_rgb color)
 }
 
 void	grid_draw(t_mlx *data, const t_camera *cam,
-		const t_grid *grid, t_rgb color)
+		const t_grid *grid, t_vec3D color)
 {
 	t_grid	grid_cpy;
 
