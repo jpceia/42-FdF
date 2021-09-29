@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/29 01:13:41 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/29 01:27:49 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_mouse
 {
 	float	x;
 	float	y;
+	t_bool	pressed;
 }	t_mouse;
 
 typedef struct s_camera
@@ -79,7 +80,7 @@ typedef struct s_data
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-	t_mouse		*mouse;
+	t_mouse		mouse;
 	t_camera	*cam;
 }	t_mlx;
 
@@ -87,5 +88,10 @@ void	plot_pixel(t_mlx *data, float x, float y, t_vec3D color);
 void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_vec3D color);
 void	grid_draw(t_mlx *data, const t_camera *cam,
 			const t_grid *grid, t_vec3D color);
+
+void	camera_init(t_camera *cam, t_vec2D grid_size, t_vec2D screen_size);
+void	mlx_data_init(t_mlx *data, t_camera *cam,
+		const t_vec2D *screen_size, char *title);
+void	mlx_data_clear(t_mlx *data);
 
 #endif

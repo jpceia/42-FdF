@@ -13,43 +13,50 @@
 #include "fdf.h"
 #include "libft.h"
 #include <stdio.h>
+#include <math.h>
+#include <mlx.h>
 
-/*
- * TODO
- * add_shape
- * is a function that accepts a double (distance) and a int (color) as
- * arguments, 0 will add no shading to the color, whilst 1 will make the
- * color completely dark. 0.5 will dim it halfway, and .25 a quarter way.
- * You get the point.
- */
-void	plot_pixel(t_mlx *data, float x, float y, t_vec3D color)
+
+void	camera_init(t_camera *cam, t_vec2D grid_size, t_vec2D screen_size)
 {
-	int		i;
-	int		j;
-	char	*dst;
+	float		s[2];
+	t_matrix	*T;
+	t_matrix	*R;
+	t_matrix	*M;
 
-	i = (int)(x + 0.5);
-	j = (int)(data->height - y + 0.5);
-	if (i < 0 || i > data->width || j < 0 || j > data->height)
-		return ;
-	dst = data->addr + (j * data->line_length + i * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst += create_trgb(color);
+	cam->translation = vec3D_create(
+			-0.5 * (grid_size.x - 1), -0.5 * (grid_size.y - 1), 0.0);
+	cam->angles.yaw = M_PI / 4;
+	cam->angles.pitch = 0;
+	cam->angles.roll = atanf(1 / sqrtf(2));
+	T = matrix_homogenous_translation(cam->translation);
+	R = matrix3x3_rotation_xyz(cam->angles);
+	R = matrix_homogeneous_from3x3(R, true);
+	M = matrix_mul(R, T, true);
+	s[0] = screen_size.x / (fabsf(matrix_at(M, 0, 0)) * grid_size.x + fabsf(matrix_at(M, 0, 1)) * grid_size.y);
+	s[1] = screen_size.y / (fabsf(matrix_at(M, 1, 0)) * grid_size.x + fabsf(matrix_at(M, 1, 1)) * grid_size.y);
+	cam->scaling = fminf(s[0], s[1]);
+	cam->offset = vec2D_create(screen_size.x / 2.0, screen_size.y / 2.0);
+	matrix_clear(M);
 }
 
-void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_vec3D color)
+void	mlx_data_init(t_mlx *data, t_camera *cam,
+		const t_vec2D *screen_size, char *title)
 {
-	int		i;
-	int		steps;
-	t_vec2D	direction;
-	t_vec2D	r;
+	data->mlx = mlx_init();
+	data->cam = cam;
+	data->width = screen_size->x;
+	data->height = screen_size->y;
+	data->win = mlx_new_window(data->mlx, data->width, data->height, title);
+	data->img = mlx_new_image(data->mlx, data->width, data->height);
+	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel),
+			&(data->line_length), &(data->endian));
+}
 
-	steps = vec2D_norm(vec2D_subtract(q, p));
-	direction = vec2D_subtract(q, p);
-	i = 0;
-	while (i < steps + 1)
-	{
-		r = vec2D_add(p, vec2D_scalar_mul(direction, (float)i / steps));
-		plot_pixel(data, r.x, r.y, color);
-		i++;
-	}
+void	mlx_data_clear(t_mlx *data)
+{
+	mlx_destroy_image(data->mlx, data->img);
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
 }
