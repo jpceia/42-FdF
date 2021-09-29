@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/29 00:45:37 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/29 01:12:04 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	grid_camera_transform(t_grid *grid, const t_camera *cam)
 	t_matrix	*M;
 
 	T = matrix_homogenous_translation(cam->translation);
-	R = matrix3x3_euler_rotation(cam->euler_angles);
+	R = matrix3x3_rotation_xyz(cam->angles);
 	R = matrix_homogeneous_from3x3(R, true);
 	S = matrix_scaling3D(vec3D_create(cam->scaling, -cam->scaling, 0.0));
 	S = matrix_homogeneous_from3x3(S, true);

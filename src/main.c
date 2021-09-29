@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 03:32:53 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/24 16:31:26 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/29 01:18:25 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	camera_setup(t_camera *cam, t_vec2D grid_size, t_vec2D screen_size)
 
 	cam->translation = vec3D_create(
 			-0.5 * (grid_size.x - 1), -0.5 * (grid_size.y - 1), 0.0);
-	cam->euler_angles.yaw = atanf(1 / sqrtf(2));
-	cam->euler_angles.roll = M_PI / 3;
-	cam->euler_angles.pitch = M_PI / 4;
+	cam->angles.yaw = M_PI / 4;
+	cam->angles.pitch = 0;
+	cam->angles.roll = atanf(1 / sqrtf(2));
 	T = matrix_homogenous_translation(cam->translation);
-	R = matrix3x3_euler_rotation(cam->euler_angles);
+	R = matrix3x3_rotation_xyz(cam->angles);
 	R = matrix_homogeneous_from3x3(R, true);
 	M = matrix_mul(R, T, true);
 	s[0] = screen_size.x / (fabsf(matrix_at(M, 0, 0))
@@ -97,4 +97,5 @@ int	main(int argc, char **argv)
 	mlx_key_hook(data.win, key_handle, &data);
 	mlx_loop(data.mlx);
 	grid_clear(&grid);
+	return (EXIT_SUCCESS);
 }

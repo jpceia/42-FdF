@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 07:57:48 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/24 15:54:57 by jceia            ###   ########.fr       */
+/*   Updated: 2021/09/29 01:17:15 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "matrix.h"
 #include "fdf.h"
 
-t_matrix	*matrix3x3_rotationX(float theta)
+t_matrix	*matrix3x3_rotation_x(float theta)
 {
 	t_matrix	*M;
 
@@ -30,7 +30,7 @@ t_matrix	*matrix3x3_rotationX(float theta)
 	return (M);
 }
 
-t_matrix	*matrix3x3_rotationY(float theta)
+t_matrix	*matrix3x3_rotation_y(float theta)
 {
 	t_matrix	*M;
 
@@ -45,7 +45,7 @@ t_matrix	*matrix3x3_rotationY(float theta)
 	return (M);
 }
 
-t_matrix	*matrix3x3_rotationZ(float theta)
+t_matrix	*matrix3x3_rotation_z(float theta)
 {
 	t_matrix	*M;
 
@@ -60,22 +60,22 @@ t_matrix	*matrix3x3_rotationZ(float theta)
 	return (M);
 }
 
-t_euler_angles	euler_angles_create(float yaw, float pitch, float roll)
+t_anglesXYZ	angles_xyz_create(float yaw, float pitch, float roll)
 {
-	t_euler_angles	e;
+	t_anglesXYZ	angles;
 
-	e.yaw = yaw;
-	e.pitch = pitch;
-	e.roll = roll;
-	return (e);
+	angles.yaw = yaw;
+	angles.pitch = pitch;
+	angles.roll = roll;
+	return (angles);
 }
 
-t_matrix	*matrix3x3_euler_rotation(t_euler_angles e)
+t_matrix	*matrix3x3_rotation_xyz(t_anglesXYZ angles)
 {
 	t_matrix	*M;
 
-	M = matrix3x3_rotationZ(e.yaw);
-	M = matrix_mul(matrix3x3_rotationX(e.pitch), M, true);
-	M = matrix_mul(matrix3x3_rotationY(e.roll), M, true);
+	M = matrix3x3_rotation_z(angles.yaw);
+	M = matrix_mul(matrix3x3_rotation_y(angles.pitch), M, true);
+	M = matrix_mul(matrix3x3_rotation_x(angles.roll), M, true);
 	return (M);
 }
