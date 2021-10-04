@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/29 01:27:49 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/04 11:52:44 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,24 @@
 # include <string.h>
 # include "matrix.h"
 
-# define WIN_TITLE  "42 - FDF"
-# define WIN_WIDTH  640
-# define WIN_HEIGHT 360
+# define WIN_TITLE		"42 - FDF"
+# define WIN_WIDTH		640
+# define WIN_HEIGHT		360
+
+# define K_LEFT_ARROW	65361
+# define K_RIGHT_ARROW	65363
+# define K_UP_ARROW		65362
+# define K_DOWN_ARROW	65364
+# define K_ESC			65307
+
+/*
+** X11 Events and masks
+*/
+
+# define KEY_PRESS 02
+# define KEY_RELEASE 03
+# define M_KEY_PRESS 1
+# define M_KEY_RELEASE 2
 
 /*
  * Color
@@ -68,11 +83,26 @@ typedef struct s_camera
 	float		scaling;
 }	t_camera;
 
-typedef struct s_data
+typedef	struct s_fdf_args
+{
+	char	*title;
+	int		width;
+	int		height;
+	t_grid	grid;
+}	t_fdf_args;
+
+typedef	struct s_keys
+{
+	unsigned int	left_arrow :1;
+	unsigned int	right_arrow :1;
+	unsigned int	up_arrow :1;
+	unsigned int	down_arrow :1;
+}	t_keys;
+
+typedef struct s_fdf
 {
 	void		*mlx;
 	void		*win;
-
 	void		*img;
 	char		*addr;
 	int			width;
@@ -81,7 +111,9 @@ typedef struct s_data
 	int			line_length;
 	int			endian;
 	t_mouse		mouse;
-	t_camera	*cam;
+	t_camera	cam;
+	t_grid		grid;
+	t_keys		pressed;
 }	t_mlx;
 
 void	plot_pixel(t_mlx *data, float x, float y, t_vec3D color);
@@ -89,9 +121,11 @@ void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_vec3D color);
 void	grid_draw(t_mlx *data, const t_camera *cam,
 			const t_grid *grid, t_vec3D color);
 
-void	camera_init(t_camera *cam, t_vec2D grid_size, t_vec2D screen_size);
-void	mlx_data_init(t_mlx *data, t_camera *cam,
-		const t_vec2D *screen_size, char *title);
+void	camera_init(t_camera *cam, const t_fdf_args *args);
+void	mlx_data_init(t_mlx *data, const t_fdf_args *args);
 void	mlx_data_clear(t_mlx *data);
+
+void    mlx_add_hooks(t_mlx *data);
+int		mlx_render(void *ptr);
 
 #endif
