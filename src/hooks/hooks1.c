@@ -24,9 +24,9 @@ void	update_cam(t_camera *cam, const t_keys *pressed)
 	if (pressed->down_arrow)
 		cam->angles.roll -= 0.01;
 	if (pressed->w)
-		cam->z_scaling_init *= 1.01;
+		cam->z_scaling *= 1.01;
 	if (pressed->s)
-		cam->z_scaling_init /= 1.01;
+		cam->z_scaling /= 1.01;
 }
 
 int	mlx_render(void *ptr)

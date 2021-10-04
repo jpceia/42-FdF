@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/24 16:06:10 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/04 12:06:41 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	grid_clear(t_grid *grid)
 	free(grid->data);
 }
 
-float	grid_max(t_grid *grid, t_coord coord)
+float	grid_max(const t_grid *grid, t_coord coord)
 {
 	float	v_max;
 	float	v;
@@ -101,7 +101,7 @@ float	grid_max(t_grid *grid, t_coord coord)
 	return (v_max);
 }
 
-float	grid_min(t_grid *grid, t_coord coord)
+float	grid_min(const t_grid *grid, t_coord coord)
 {
 	float	v_min;
 	float	v;

@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 03:32:53 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/04 11:42:00 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/04 12:29:20 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 #include <mlx.h>
 #include <math.h>
 
-
-// https://groups.google.com/g/comp.graphics.api.opengl/c/9fS5o2QtyPc
 int	main(int argc, char **argv)
 {
 	t_fdf_args	args;

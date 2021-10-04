@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/04 12:50:49 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/04 13:12:10 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_mouse
 typedef struct s_camera
 {
 	t_vec3D		translation;
-	float		z_scaling_init;
+	float		z_scaling;
 	t_anglesXYZ	angles;
 	t_vec2D		offset;
 	float		scaling;
