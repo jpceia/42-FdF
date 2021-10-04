@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/29 01:12:04 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/04 11:42:29 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,5 @@ void	grid_draw(t_mlx *data, const t_camera *cam,
 	grid_camera_transform(&grid_cpy, cam);
 	grid_draw_horizontal(data, &grid_cpy, color);
 	grid_draw_vertical(data, &grid_cpy, color);
+	grid_clear(&grid_cpy);
 }
