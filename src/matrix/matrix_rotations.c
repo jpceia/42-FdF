@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 07:57:48 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/29 01:17:15 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/04 11:28:23 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_matrix	*matrix3x3_rotation_z(float theta)
 {
 	t_matrix	*M;
 
-	M = matrix_empty(3, 3);
+	M = matrix_zeros(3, 3);
 	if (!M)
 		return (NULL);
 	M->data[0] = cos(theta);
