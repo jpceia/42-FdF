@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 01:23:27 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/29 01:23:29 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/05 22:25:34 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
  * color completely dark. 0.5 will dim it halfway, and .25 a quarter way.
  * You get the point.
  */
-void	plot_pixel(t_mlx *data, float x, float y, t_vec3D color)
+void	plot_pixel(t_mlx *data, t_vec2D p, t_vec3D color)
 {
 	int		i;
 	int		j;
 	char	*dst;
 
-	i = (int)(x + 0.5);
-	j = (int)(data->height - y + 0.5);
+	i = (int)(p.x + 0.5);
+	j = (int)(p.y + 0.5);
 	if (i < 0 || i > data->width || j < 0 || j > data->height)
 		return ;
 	dst = data->addr + (j * data->line_length + i * (data->bits_per_pixel / 8));
@@ -40,16 +40,18 @@ void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_vec3D color)
 {
 	int		i;
 	int		steps;
+	float	t;
 	t_vec2D	direction;
 	t_vec2D	r;
 
 	steps = vec2D_norm(vec2D_subtract(q, p));
 	direction = vec2D_subtract(q, p);
 	i = 0;
-	while (i < steps + 1)
+	while (i <= steps)
 	{
-		r = vec2D_add(p, vec2D_scalar_mul(direction, (float)i / steps));
-		plot_pixel(data, r.x, r.y, color);
+		t = (float)i / steps;
+		r = vec2D_add(p, vec2D_scalar_mul(direction, t));
+		plot_pixel(data, r, color);
 		i++;
 	}
 }

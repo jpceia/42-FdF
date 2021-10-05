@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/04 13:12:10 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/05 22:15:24 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "matrix.h"
 
 # define WIN_TITLE		"42 - FDF"
-# define WIN_WIDTH		640
-# define WIN_HEIGHT		360
+# define WIN_WIDTH		1080
+# define WIN_HEIGHT		720
 
 # define K_LEFT_ARROW	65361
 # define K_RIGHT_ARROW	65363
@@ -124,7 +124,7 @@ typedef struct s_fdf
 	t_keys		pressed;
 }	t_mlx;
 
-void	plot_pixel(t_mlx *data, float x, float y, t_vec3D color);
+void	plot_pixel(t_mlx *data, t_vec2D p, t_vec3D color);
 void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_vec3D color);
 void	grid_draw(t_mlx *data, const t_camera *cam,
 			const t_grid *grid, t_vec3D color);
