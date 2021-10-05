@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 15:23:30 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/29 01:16:17 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/05 22:05:12 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ typedef struct s_anglesXYZ
 	float	roll;
 }	t_anglesXYZ;
 
-t_anglesXYZ	angles_xyz_create(float yaw, float pitch, float roll);
-
 t_bool		check_matrix_nrows(int nrows, int _nrows);
 t_bool		check_matrix_ncols(int ncols, int _ncols);
 
@@ -54,7 +52,7 @@ t_matrix	*matrix_transpose(t_matrix	*M, t_bool do_free);
 t_matrix	*matrix3x3_rotation_x(float theta);
 t_matrix	*matrix3x3_rotation_y(float theta);
 t_matrix	*matrix3x3_rotation_z(float theta);
-t_matrix	*matrix3x3_rotation_xyz(t_anglesXYZ angles);
+t_matrix	*matrix3x3_rotation_xyz(t_vec3D	angles);
 
 t_matrix	*matrix_scaling3D(t_vec3D s);
 t_vec3D		matrix_mul_vec3D(t_matrix *M, t_vec3D p);

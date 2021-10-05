@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 07:57:48 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/04 11:28:23 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/05 22:08:55 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,12 @@ t_matrix	*matrix3x3_rotation_z(float theta)
 	return (M);
 }
 
-t_anglesXYZ	angles_xyz_create(float yaw, float pitch, float roll)
-{
-	t_anglesXYZ	angles;
-
-	angles.yaw = yaw;
-	angles.pitch = pitch;
-	angles.roll = roll;
-	return (angles);
-}
-
-t_matrix	*matrix3x3_rotation_xyz(t_anglesXYZ angles)
+t_matrix	*matrix3x3_rotation_xyz(t_vec3D angles)
 {
 	t_matrix	*M;
 
-	M = matrix3x3_rotation_z(angles.yaw);
-	M = matrix_mul(matrix3x3_rotation_y(angles.pitch), M, true);
-	M = matrix_mul(matrix3x3_rotation_x(angles.roll), M, true);
+	M = matrix3x3_rotation_z(angles.z);
+	M = matrix_mul(matrix3x3_rotation_y(angles.y), M, true);
+	M = matrix_mul(matrix3x3_rotation_x(angles.x), M, true);
 	return (M);
 }

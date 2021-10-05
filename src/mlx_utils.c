@@ -37,7 +37,7 @@ void	camera_init(t_camera *cam, const t_fdf_args *args)
 				args->grid.height - 1, z[0] + z[1]), -0.5);
 	cam->z_scaling = calculate_z_scaling(
 			fmaxf(args->grid.height, args->grid.width), z[0], z[1]);
-	cam->angles = angles_xyz_create(M_PI / 4, 0, atanf(1 / sqrtf(2)));
+	cam->angles = vec3D_create(atanf(1 / sqrtf(2)), 0.0, M_PI / 4);
 	T = matrix_homogenous_translation(cam->translation);
 	R = matrix3x3_rotation_xyz(cam->angles);
 	R = matrix_homogeneous_from3x3(R, true);

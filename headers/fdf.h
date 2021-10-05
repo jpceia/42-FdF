@@ -80,11 +80,11 @@ typedef struct s_mouse
 
 typedef struct s_camera
 {
-	t_vec3D		translation;
-	float		z_scaling;
-	t_anglesXYZ	angles;
-	t_vec2D		offset;
-	float		scaling;
+	t_vec3D	translation;
+	t_vec3D	angles;
+	t_vec2D	offset;
+	float	z_scaling;
+	float	scaling;
 }	t_camera;
 
 typedef struct s_fdf_args

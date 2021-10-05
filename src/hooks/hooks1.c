@@ -16,13 +16,13 @@
 void	update_cam(t_camera *cam, const t_keys *pressed)
 {
 	if (pressed->left_arrow)
-		cam->angles.yaw += 0.01;
+		cam->angles.z += 0.01;
 	if (pressed->right_arrow)
-		cam->angles.yaw -= 0.01;
+		cam->angles.z -= 0.01;
 	if (pressed->up_arrow)
-		cam->angles.roll += 0.01;
+		cam->angles.x += 0.01;
 	if (pressed->down_arrow)
-		cam->angles.roll -= 0.01;
+		cam->angles.x -= 0.01;
 	if (pressed->w)
 		cam->z_scaling *= 1.01;
 	if (pressed->s)
