@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 18:33:58 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/05 21:42:38 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/05 21:55:01 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ static int	grid_append_line(int line_nr, int N, char *line, t_vec3D *arr)
 static void	list_to_grid(t_grid *grid, t_list *lst)
 {
 	int		status;
-	int		index;
+	int		line_nr;
 	t_list	*node;
 
 	grid_init(grid, ft_strwc(lst->content, ' '), ft_lstsize(lst));
-	index = 0;
+	line_nr = 0;
 	node = lst;
 	status = 0;
 	while (node && status != -1)
 	{
 		status = grid_append_line(
-				index, grid->width, node->content, grid->data[index]);
+				line_nr, grid->width, node->content, grid->data[line_nr]);
 		node = node->next;
-		index++;
+		line_nr++;
 	}
 	ft_lstclear(&lst, free);
 	if (status == -1)
@@ -77,12 +77,12 @@ void	grid_parse_file(t_grid *grid, char *fname)
 	fd = open(fname, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putendl_fd("Error opening file", STDERR_FILENO);
+		ft_putendl_error("Error opening file");
 		exit(EXIT_FAILURE);
 	}
 	lst = NULL;
 	while (ft_get_next_line(fd, &line) > 0)
-		ft_lstadd_back(&lst, ft_lstnew(line));
+		ft_lstpush_back(&lst, line);
 	free(line);
 	close(fd);
 	list_to_grid(grid, lst);
