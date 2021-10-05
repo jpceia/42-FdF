@@ -47,7 +47,7 @@ void	grid_camera_transform(t_grid *grid, const t_camera *cam)
 	R = matrix_homogeneous_from3x3(R, true);
 	S = matrix_scaling3D(vec3D_create(cam->scaling, -cam->scaling, 0.0));
 	S = matrix_homogeneous_from3x3(S, true);
-	M = matrix_mul(T, Sz, true);
+	M = matrix_mul(Sz, T, true);
 	M = matrix_mul(R, M, true);
 	M = matrix_mul(S, M, true);
 	T = matrix_homogenous_translation(
