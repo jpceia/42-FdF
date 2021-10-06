@@ -29,14 +29,24 @@
 # define K_D			100
 # define K_W			119
 # define K_S			115
-/*
-** X11 Events and masks
-*/
 
+/*
+ * X11 Events
+*/
 # define KEY_PRESS		02
 # define KEY_RELEASE	03
-# define M_KEY_PRESS	1
-# define M_KEY_RELEASE	2
+# define BUTTON_PRESS	04
+# define BUTTON_RELEASE 05
+# define DESTROY_NOTIFY	17
+
+/*
+ * X11 Masks
+ */
+# define M_NO_EVENT			0L
+# define M_KEY_PRESS		1L
+# define M_KEY_RELEASE		2L
+# define M_BUTTON_PRESS 	4L
+# define M_BUTTON_RELEASE	8L
 
 /*
  * Color
