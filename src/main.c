@@ -6,18 +6,17 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 03:32:53 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/04 12:29:20 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 07:09:17 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include <mlx.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "libft.h"
-#include "fdf.h"
-#include <stdio.h>
 #include <mlx.h>
 #include <math.h>
+#include "libft.h"
+#include "fdf.h"
 
 int	main(int argc, char **argv)
 {

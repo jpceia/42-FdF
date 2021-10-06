@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:17:16 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/22 10:25:47 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 07:02:40 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,4 @@ float	matrix_at(t_matrix *A, int i, int j)
 		return (NAN);
 	}
 	return (A->data[i * A->ncols + j]);
-}
-
-void	matrix_print(t_matrix *M)
-{
-	int	i;
-	int	j;
-
-	if (!M)
-		return ;
-	i = 0;
-	while (i < M->nrows)
-	{
-		j = 0;
-		while (j < M->ncols - 1)
-		{
-			printf("%f\t", M->data[i * M->ncols + j]);
-			j++;
-		}
-		printf("%f\n", M->data[i * M->ncols + j]);
-		i++;
-	}
 }
