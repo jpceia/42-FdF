@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/05 22:15:24 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 05:50:00 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 /*
  * X11 Events
-*/
+ */
 # define KEY_PRESS		02
 # define KEY_RELEASE	03
 # define BUTTON_PRESS	04
@@ -83,15 +83,15 @@ void	ft_putfloat(float x);
  */
 typedef struct s_mouse
 {
-	float	x;
-	float	y;
-	t_bool	pressed;
+	t_vec2D			pos;
+	unsigned int	pressed;
 }	t_mouse;
 
 typedef struct s_camera
 {
 	t_vec3D	translation;
 	t_vec3D	angles;
+	t_vec2D	prev_offset;
 	t_vec2D	offset;
 	float	z_scaling;
 	float	scaling;
@@ -117,7 +117,7 @@ typedef struct s_keys
 	unsigned int	s			:1;
 }	t_keys;
 
-typedef struct s_fdf
+typedef struct s_mlx
 {
 	void		*mlx;
 	void		*win;
@@ -149,6 +149,7 @@ int		mlx_render(void *ptr);
 int		exit_handle(t_mlx *data);
 int		key_press(int keycode, t_mlx *data);
 int		key_release(int keycode, t_mlx *data);
-int		mouse_handle(int button, int x, int y, t_mlx *data);
+int		mouse_press(int button, int x, int y, t_mlx *data);
+int		mouse_release(int button, int x, int y, t_mlx *data);
 
 #endif

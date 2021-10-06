@@ -48,6 +48,7 @@ void	camera_init(t_camera *cam, const t_fdf_args *args)
 			+ fabsf(matrix_at(M, 1, 1)) * args->grid.height);
 	cam->scaling = fminf(s[0], s[1]);
 	cam->offset = vec2D_create(args->width / 2.0, args->height / 2.0);
+	cam->prev_offset = cam->offset;
 	matrix_clear(M);
 }
 

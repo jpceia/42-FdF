@@ -21,7 +21,6 @@ int	exit_handle(t_mlx *data)
 
 int	key_press(int keycode, t_mlx *data)
 {
-	printf("Key pressed: %d\n", keycode);
 	if (keycode == K_DOWN_ARROW)
 		data->pressed.down_arrow = 1;
 	else if (keycode == K_UP_ARROW)
@@ -73,13 +72,33 @@ int	key_release(int keycode, t_mlx *data)
  * * Scroll up	- button 4 -> Zoom IN
  * * Scroll down- button 5 -> Zoom OUT
  */
-int	mouse_handle(int button, int x, int y, t_mlx *data)
+int	mouse_press(int button, int x, int y, t_mlx *data)
 {
-	(void)x;
-	(void)y;
-	if (button == 5)
-		data->cam.scaling /= 1.05;
+	if (button == 1)
+	{
+		data->mouse.pressed = 1;
+		data->mouse.pos = vec2D_create(x, y);
+	}
 	else if (button == 4)
 		data->cam.scaling *= 1.05;
-	return (0);
+	else if (button == 5)
+		data->cam.scaling /= 1.05;
+	else
+		return (0);
+	return (1);
+}
+
+int	mouse_release(int button, int x, int y, t_mlx *data)
+{
+	if (button == 1)
+	{
+		data->mouse.pressed = 0;
+		data->cam.offset = vec2D_add(data->cam.prev_offset,
+				vec2D_subtract(vec2D_create(x, y),
+					data->mouse.pos));
+		data->cam.prev_offset = data->cam.offset;
+	}
+	else
+		return (0);
+	return (1);
 }
