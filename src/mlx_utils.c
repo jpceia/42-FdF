@@ -51,18 +51,6 @@ void	camera_init(t_camera *cam, const t_fdf_args *args)
 	matrix_clear(M);
 }
 
-void	keys_init(t_keys *p)
-{
-	p->down_arrow = 0;
-	p->left_arrow = 0;
-	p->right_arrow = 0;
-	p->up_arrow = 0;
-	p->a = 0;
-	p->d = 0;
-	p->w = 0;
-	p->s = 0;
-}
-
 void	mlx_data_init(t_mlx *data, const t_fdf_args *args)
 {
 	data->mlx = mlx_init();
@@ -72,7 +60,8 @@ void	mlx_data_init(t_mlx *data, const t_fdf_args *args)
 	data->grid = args->grid;
 	data->win = mlx_new_window(
 			data->mlx, args->width, args->height, args->title);
-	keys_init(&(data->pressed));
+	ft_bzero(&(data->pressed), sizeof(data->pressed));
+	ft_bzero(&(data->mouse), sizeof(data->mouse));
 	data->img = NULL;
 }
 
