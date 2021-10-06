@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 01:23:27 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/05 22:25:34 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 06:26:37 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_vec3D color)
 	t_vec2D	direction;
 	t_vec2D	r;
 
-	steps = vec2D_norm(vec2D_subtract(q, p));
+	steps = ft_imax(
+			ft_iabs((int)(q.x + 0.5) - (int)(p.x + 0.5)),
+			ft_iabs((int)(q.y + 0.5) - (int)(p.y + 0.5)));
 	direction = vec2D_subtract(q, p);
 	i = 0;
 	while (i <= steps)
