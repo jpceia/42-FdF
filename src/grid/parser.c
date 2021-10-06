@@ -83,6 +83,11 @@ void	grid_parse_file(t_grid *grid, char *fname)
 	while (ft_get_next_line(fd, &line) > 0)
 		ft_lstpush_back(&lst, line);
 	free(line);
-	close(fd);
+	if (close(fd) < 0)
+	{
+		perror("Error closing file");
+		ft_lstclear(&lst, free);
+		exit(EXIT_FAILURE);
+	}
 	list_to_grid(grid, lst);
 }

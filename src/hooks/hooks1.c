@@ -50,7 +50,7 @@ int	mlx_render(void *ptr)
 	data->img = mlx_new_image(data->mlx, data->width, data->height);
 	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel),
 			&(data->line_length), &(data->endian));
-	grid_draw(data, &data->cam, &data->grid, vec3D_create(1.0, 1.0, 1.0));
+	grid_draw(data, vec3D_create(1.0, 1.0, 1.0));
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
 	return (1);

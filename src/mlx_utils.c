@@ -29,7 +29,7 @@ void	clean_exit(t_mlx *data, char *msg)
 	exit(EXIT_FAILURE);
 }
 
-t_camera	*camera_init(t_camera *cam, const t_fdf_args *args)
+int	camera_init(t_camera *cam, const t_fdf_args *args)
 {
 	float		z[2];
 	t_matrix	*T;
@@ -46,7 +46,7 @@ t_camera	*camera_init(t_camera *cam, const t_fdf_args *args)
 	M = matrix_homogeneous_from3x3(matrix3x3_rotation_xyz(cam->angles), true);
 	M = matrix_mul(M, T, true);
 	if (!M)
-		return (NULL);
+		return (-1);
 	z[0] = args->width / (fabsf(matrix_at(M, 0, 0)) * args->grid.width
 			+ fabsf(matrix_at(M, 0, 1)) * args->grid.height);
 	z[1] = args->height / (fabsf(matrix_at(M, 1, 0)) * args->grid.width
@@ -55,12 +55,12 @@ t_camera	*camera_init(t_camera *cam, const t_fdf_args *args)
 	cam->offset = vec2D_create(args->width / 2.0, args->height / 2.0);
 	cam->prev_offset = cam->offset;
 	matrix_clear(M);
-	return (cam);
+	return (0);
 }
 
 void	mlx_data_init(t_mlx *data, const t_fdf_args *args)
 {
-	if (!camera_init(&(data->cam), args))
+	if (camera_init(&(data->cam), args) < 0)
 		clean_exit(data, "Failed setting up the camera");
 	data->mlx = mlx_init();
 	data->width = args->width;
