@@ -6,16 +6,15 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 18:33:58 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/05 21:55:01 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 07:24:30 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include "libft.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include "fdf.h"
+#include "libft.h"
 
 static int	grid_append_line(int line_nr, int N, char *line, t_vec3D *arr)
 {
@@ -24,13 +23,13 @@ static int	grid_append_line(int line_nr, int N, char *line, t_vec3D *arr)
 
 	if (ft_strwc(line, ' ') != N)
 	{
-		ft_putendl_error("Lines with different number of columns");
+		perror("Lines with different number of columns");
 		return (-1);
 	}
 	s_split = ft_split(line, ' ');
 	if (!s_split)
 	{
-		ft_putendl_error("Error parsing line");
+		perror("Error parsing line");
 		return (-1);
 	}
 	index = 0;
@@ -77,7 +76,7 @@ void	grid_parse_file(t_grid *grid, char *fname)
 	fd = open(fname, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putendl_error("Error opening file");
+		perror("Error opening file");
 		exit(EXIT_FAILURE);
 	}
 	lst = NULL;

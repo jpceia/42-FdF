@@ -6,10 +6,11 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 09:39:38 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/21 17:52:07 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 07:19:44 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <math.h>
 #include "libft.h"
 #include "vec.h"
@@ -37,8 +38,7 @@ float	vec2D_angle(t_vec2D u, t_vec2D v)
 	norm_v = vec2D_norm(v);
 	if (norm_u == 0 || norm_v == 0)
 	{
-		ft_putstr_error("Impossible to calculate angle between two vectors");
-		ft_putendl_error("where one of them has zero lenght");
+		perror("Vector with zero length");
 		return (-1);
 	}
 	return (dot_uv / norm_u / norm_v);

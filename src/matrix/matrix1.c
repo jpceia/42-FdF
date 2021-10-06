@@ -61,17 +61,17 @@ float	matrix_at(t_matrix *A, int i, int j)
 {
 	if (!A)
 	{
-		ft_putendl_error("NULL ptr");
+		perror("NULL ptr");
 		return (NAN);
 	}
 	if (i < 0 || i >= A->nrows)
 	{
-		ft_putendl_error("Row index outside range");
+		perror("Row index outside range");
 		return (NAN);
 	}
 	if (j < 0 || j >= A->ncols)
 	{
-		ft_putendl_error("Column index outside range");
+		perror("Column index outside range");
 		return (NAN);
 	}
 	return (A->data[i * A->ncols + j]);

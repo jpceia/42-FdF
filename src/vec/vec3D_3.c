@@ -6,11 +6,12 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 09:39:38 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/21 17:52:21 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 07:23:09 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <stdio.h>
 #include "libft.h"
 #include "vec.h"
 
@@ -37,8 +38,7 @@ float	vec3D_angle(t_vec3D u, t_vec3D v)
 	norm_v = vec3D_norm(v);
 	if (norm_u == 0 || norm_v == 0)
 	{
-		ft_putstr_error("Impossible to calculate angle between two vectors");
-		ft_putendl_error("where one of them has zero lenght");
+		perror("Vector with zero length");
 		return (-1);
 	}
 	return (dot_uv / norm_u / norm_v);

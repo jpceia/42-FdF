@@ -6,10 +6,11 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 22:32:05 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/22 08:30:57 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 07:19:37 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "vec.h"
 #include "libft.h"
 
@@ -52,6 +53,6 @@ float	vec3D_coord(t_vec3D p, t_coord coord)
 		return (p.y);
 	if (coord == COORD_Z)
 		return (p.z);
-	ft_putendl_error("Invalid coordinate");
+	perror("Invalid coordinate");
 	return (0.0);
 }

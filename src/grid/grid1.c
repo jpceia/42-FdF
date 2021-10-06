@@ -22,7 +22,7 @@ void	grid_init(t_grid *grid, int width, int height)
 	grid->data = (t_vec3D **)malloc(width * height * sizeof(**grid->data));
 	if (!grid->data)
 	{
-		ft_putendl("Error allocating memory to grid");
+		perror("Error allocating memory to grid");
 		exit(EXIT_FAILURE);
 	}
 	index = 0;
@@ -31,7 +31,7 @@ void	grid_init(t_grid *grid, int width, int height)
 		arr = (t_vec3D *)malloc(width * sizeof(*arr));
 		if (!arr)
 		{
-			ft_putendl_error("Error assigning memory to array");
+			perror("Error assigning memory to array");
 			grid->height = index;
 			grid_clear(grid);
 			exit(EXIT_FAILURE);

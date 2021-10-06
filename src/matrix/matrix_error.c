@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 17:30:19 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/21 17:38:36 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 07:01:06 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,18 @@ t_bool	check_matrix_nrows(int nrows, int _nrows)
 {
 	if (nrows != _nrows)
 	{
-		ft_putendl_error("Row number mismatch: ");
-		ft_putnbr_error(nrows);
-		ft_putstr_error("!=");
-		ft_putnbr_error(_nrows);
-		ft_putchar_error('\n');
+		perror("Row number mismatch");
+		return (false);
 	}
-	return (nrows == _nrows);
+	return (true);
 }
 
 t_bool	check_matrix_ncols(int ncols, int _ncols)
 {
 	if (ncols != _ncols)
 	{
-		ft_putendl_error("Column number mismatch: ");
-		ft_putnbr_error(ncols);
-		ft_putstr_error("!=");
-		ft_putnbr_error(_ncols);
-		ft_putchar_error('\n');
+		perror("Column number mismatch");
+		return (false);
 	}
-	return (ncols == _ncols);
+	return (true);
 }

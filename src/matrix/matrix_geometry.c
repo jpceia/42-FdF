@@ -94,7 +94,7 @@ t_vec3D	matrix_homogenous_mul_vec3D(t_matrix *M, t_vec3D p)
 		return (vec3D_origin());
 	if (M->data[15] != 1.0)
 	{
-		ft_putendl_error("Non homogeous matrix (M_44 != 1)");
+		perror("Non homogeous matrix (M_44 != 1)");
 		return (vec3D_origin());
 	}
 	w = M->data[12] * p.x + M->data[13] * p.y
