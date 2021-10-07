@@ -27,7 +27,7 @@ void	plot_pixel(t_mlx *data, t_vec2D p, t_vec3D color)
 	*(unsigned int *)dst += create_trgb(color);
 }
 
-void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_vec3D color)
+void	plot_line(t_mlx *data, t_vec2D p[2], t_vec3D color[2])
 {
 	int		i;
 	int		steps;
@@ -36,15 +36,15 @@ void	plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_vec3D color)
 	t_vec2D	r;
 
 	steps = ft_imax(
-			ft_iabs((int)(q.x + 0.5) - (int)(p.x + 0.5)),
-			ft_iabs((int)(q.y + 0.5) - (int)(p.y + 0.5)));
-	direction = vec2D_subtract(q, p);
+			ft_iabs((int)(p[1].x + 0.5) - (int)(p[0].x + 0.5)),
+			ft_iabs((int)(p[1].y + 0.5) - (int)(p[0].y + 0.5)));
+	direction = vec2D_subtract(p[1], p[0]);
 	i = 0;
 	while (i <= steps)
 	{
 		t = (float)i / steps;
-		r = vec2D_add(p, vec2D_scalar_mul(direction, t));
-		plot_pixel(data, r, color);
+		r = vec2D_add(p[0], vec2D_scalar_mul(direction, t));
+		plot_pixel(data, r, vec3D_interpolate(color[0], color[1], t));
 		i++;
 	}
 }

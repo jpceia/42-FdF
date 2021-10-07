@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/06 09:38:09 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/07 22:03:51 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@
  * Color
  */
 
-typedef int		t_trgb;
-
 int			create_trgb(t_vec3D color);
 
 /*
@@ -67,12 +65,18 @@ typedef struct s_grid
 	int		height;
 }	t_grid;
 
+t_grid		*grid_init(t_grid **grid, int width, int height);
+t_grid		*grid_clone(const t_grid *grid);
+void		grid_clear(void *ptr);
 t_grid		*grid_parse_file(t_grid **grid, char *fname);
 t_grid		*list_to_grid(t_list *lst, t_grid **grid);
 float		grid_max(const t_grid *grid, t_coord coord);
 float		grid_min(const t_grid *grid, t_coord coord);
-void		grid_apply_transformation(t_grid *grid, t_matrix *M);
+t_grid		*grid_apply_transformation(t_grid *grid, t_matrix *M);
 
+/*
+ * Utils
+ */
 float		get_nbr(char *s);
 void		ft_putfloat(float x);
 
@@ -97,13 +101,13 @@ typedef struct s_camera
 
 t_matrix	*camera_transform(const t_camera *cam);
 
-typedef struct s_fdf_args
+typedef struct s_args
 {
 	char	*title;
-	int		width;
-	int		height;
-	t_grid	grid;
-}	t_fdf_args;
+	char	*fname;
+	t_vec2D	screen_size;
+	t_vec3D	colors[2];
+}	t_args;
 
 typedef struct s_keys
 {
@@ -128,20 +132,23 @@ typedef struct s_mlx
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-	t_mouse		mouse;
-	t_camera	cam;
-	t_grid		grid;
-	t_keys		pressed;
+	t_mouse		*mouse;
+	t_camera	*cam;
+	t_grid		*grid;
+	t_grid		*color_grid;
+	t_keys		*pressed;
 }	t_mlx;
 
-void		lot_pixel(t_mlx *data, t_vec2D p, t_vec3D color);
-void		plot_line(t_mlx *data, t_vec2D p, t_vec2D q, t_vec3D color);
-void		grid_draw(t_mlx *data, t_vec3D color);
+void		plot_pixel(t_mlx *data, t_vec2D p, t_vec3D color);
+void		plot_line(t_mlx *data, t_vec2D p[2], t_vec3D color[2]);
+void		grid_draw(t_mlx *data);
 
-void		clean_exit(t_mlx *data, char *msg);
-int			camera_init(t_camera *cam, const t_fdf_args *args);
-void		mlx_data_init(t_mlx *data, const t_fdf_args *args);
-void		mlx_data_clear(t_mlx *data);
+void		mlx_data_clear(void *ptr);
+void		*clean_exit(void *data, char *msg, void (*del)(void *),
+				int do_exit);
+t_camera	*camera_init(t_camera **cam, const t_grid *grid,
+				t_vec2D screen_size);
+t_mlx		*mlx_data_init(t_mlx *data, const t_args *args);
 
 void		mlx_add_hooks(t_mlx *data);
 int			mlx_render(void *ptr);

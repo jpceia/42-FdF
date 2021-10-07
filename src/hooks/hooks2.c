@@ -22,21 +22,21 @@ int	exit_handle(t_mlx *data)
 int	key_press(int keycode, t_mlx *data)
 {
 	if (keycode == K_DOWN_ARROW)
-		data->pressed.down_arrow = 1;
+		data->pressed->down_arrow = 1;
 	else if (keycode == K_UP_ARROW)
-		data->pressed.up_arrow = 1;
+		data->pressed->up_arrow = 1;
 	else if (keycode == K_LEFT_ARROW)
-		data->pressed.left_arrow = 1;
+		data->pressed->left_arrow = 1;
 	else if (keycode == K_RIGHT_ARROW)
-		data->pressed.right_arrow = 1;
+		data->pressed->right_arrow = 1;
 	else if (keycode == K_A)
-		data->pressed.a = 1;
+		data->pressed->a = 1;
 	else if (keycode == K_D)
-		data->pressed.d = 1;
+		data->pressed->d = 1;
 	else if (keycode == K_W)
-		data->pressed.w = 1;
+		data->pressed->w = 1;
 	else if (keycode == K_S)
-		data->pressed.s = 1;
+		data->pressed->s = 1;
 	else if (keycode == K_ESC)
 		exit_handle(data);
 	else
@@ -47,21 +47,21 @@ int	key_press(int keycode, t_mlx *data)
 int	key_release(int keycode, t_mlx *data)
 {
 	if (keycode == K_DOWN_ARROW)
-		data->pressed.down_arrow = 0;
+		data->pressed->down_arrow = 0;
 	else if (keycode == K_UP_ARROW)
-		data->pressed.up_arrow = 0;
+		data->pressed->up_arrow = 0;
 	else if (keycode == K_LEFT_ARROW)
-		data->pressed.left_arrow = 0;
+		data->pressed->left_arrow = 0;
 	else if (keycode == K_RIGHT_ARROW)
-		data->pressed.right_arrow = 0;
+		data->pressed->right_arrow = 0;
 	else if (keycode == K_A)
-		data->pressed.a = 0;
+		data->pressed->a = 0;
 	else if (keycode == K_D)
-		data->pressed.d = 0;
+		data->pressed->d = 0;
 	else if (keycode == K_W)
-		data->pressed.w = 0;
+		data->pressed->w = 0;
 	else if (keycode == K_S)
-		data->pressed.s = 0;
+		data->pressed->s = 0;
 	else
 		return (0);
 	return (1);
@@ -76,13 +76,13 @@ int	mouse_press(int button, int x, int y, t_mlx *data)
 {
 	if (button == 1)
 	{
-		data->mouse.pressed = 1;
-		data->mouse.pos = vec2D_create(x, y);
+		data->mouse->pressed = 1;
+		data->mouse->pos = vec2D_create(x, y);
 	}
 	else if (button == 4)
-		data->cam.scaling *= 1.05;
+		data->cam->scaling *= 1.05;
 	else if (button == 5)
-		data->cam.scaling /= 1.05;
+		data->cam->scaling /= 1.05;
 	else
 		return (0);
 	return (1);
@@ -92,11 +92,11 @@ int	mouse_release(int button, int x, int y, t_mlx *data)
 {
 	if (button == 1)
 	{
-		data->mouse.pressed = 0;
-		data->cam.offset = vec2D_add(data->cam.prev_offset,
+		data->mouse->pressed = 0;
+		data->cam->offset = vec2D_add(data->cam->prev_offset,
 				vec2D_subtract(vec2D_create(x, y),
-					data->mouse.pos));
-		data->cam.prev_offset = data->cam.offset;
+					data->mouse->pos));
+		data->cam->prev_offset = data->cam->offset;
 	}
 	else
 		return (0);

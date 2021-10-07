@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/06 08:08:08 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/07 23:57:40 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void	grid_apply_transformation(t_grid *grid, t_matrix *M)
+t_grid	*grid_apply_transformation(t_grid *grid, t_matrix *M)
 {
 	int		i;
 	int		j;
@@ -30,36 +30,13 @@ void	grid_apply_transformation(t_grid *grid, t_matrix *M)
 		}
 		i++;
 	}
+	return (grid);
 }
 
-t_matrix	*camera_transform(const t_camera *cam)
+void	grid_draw_horizontal(t_mlx *data, const t_grid *grid)
 {
-	t_matrix	*T;
-	t_matrix	*Sz;	
-	t_matrix	*S;
-	t_matrix	*R;
-	t_matrix	*M;
-
-	T = matrix_homogenous_translation(cam->translation);
-	Sz = matrix_scaling3D(vec3D_create(1, 1, cam->z_scaling));
-	Sz = matrix_homogeneous_from3x3(Sz, true);
-	R = matrix3x3_rotation_xyz(cam->angles);
-	R = matrix_homogeneous_from3x3(R, true);
-	S = matrix_scaling3D(vec3D_create(cam->scaling, cam->scaling, 0.0));
-	S = matrix_homogeneous_from3x3(S, true);
-	M = matrix_mul(Sz, T, true);
-	M = matrix_mul(R, M, true);
-	M = matrix_mul(S, M, true);
-	T = matrix_homogenous_translation(
-			vec3D_create(cam->offset.x, cam->offset.y, 0.0));
-	M = matrix_mul(T, M, true);
-	return (M);
-}
-
-void	grid_draw_horizontal(t_mlx *data, const t_grid *grid, t_vec3D color)
-{
-	t_vec2D	p;
-	t_vec2D	q;
+	t_vec2D	p[2];
+	t_vec3D	color[2];
 	int		i;
 	int		j;
 
@@ -69,21 +46,23 @@ void	grid_draw_horizontal(t_mlx *data, const t_grid *grid, t_vec3D color)
 		j = 0;
 		while (j < grid->width - 1)
 		{
-			p.x = grid->data[i][j].x;
-			p.y = grid->data[i][j].y;
-			q.x = grid->data[i][j + 1].x;
-			q.y = grid->data[i][j + 1].y;
-			plot_line(data, p, q, color);
+			p[0].x = grid->data[i][j].x;
+			p[0].y = grid->data[i][j].y;
+			p[1].x = grid->data[i][j + 1].x;
+			p[1].y = grid->data[i][j + 1].y;
+			color[0] = data->color_grid->data[i][j];
+			color[1] = data->color_grid->data[i][j + 1];
+			plot_line(data, p, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	grid_draw_vertical(t_mlx *data, const t_grid *grid, t_vec3D color)
+void	grid_draw_vertical(t_mlx *data, const t_grid *grid)
 {
-	t_vec2D	p;
-	t_vec2D	q;
+	t_vec2D	p[2];
+	t_vec3D	color[2];
 	int		i;
 	int		j;
 
@@ -93,29 +72,34 @@ void	grid_draw_vertical(t_mlx *data, const t_grid *grid, t_vec3D color)
 		j = 0;
 		while (j < grid->width)
 		{
-			p.x = grid->data[i][j].x;
-			p.y = grid->data[i][j].y;
-			q.x = grid->data[i + 1][j].x;
-			q.y = grid->data[i + 1][j].y;
-			plot_line(data, p, q, color);
+			p[0].x = grid->data[i][j].x;
+			p[0].y = grid->data[i][j].y;
+			p[1].x = grid->data[i + 1][j].x;
+			p[1].y = grid->data[i + 1][j].y;
+			color[0] = data->color_grid->data[i][j];
+			color[1] = data->color_grid->data[i + 1][j];
+			plot_line(data, p, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	grid_draw(t_mlx *data, t_vec3D color)
+void	grid_draw(t_mlx *data)
 {
 	t_matrix	*M;
-	t_grid		grid_cpy;
+	t_grid		*grid_cpy;
 
-	grid_cpy = grid_clone(&(data->grid));
-	M = camera_transform(&(data->cam));
+	M = camera_transform(data->cam);
 	if (!M)
-		clean_exit(data, "Error calculating the camera transform");
-	grid_apply_transformation(&grid_cpy, M);
+		clean_exit(data, "Error calculating the camera transform",
+			mlx_data_clear, 1);
+	grid_cpy = grid_clone(data->grid);
+	if (!grid_cpy)
+		clean_exit(data, "Error creating a grid clone", mlx_data_clear, 1);
+	grid_apply_transformation(grid_cpy, M);
 	matrix_clear(M);
-	grid_draw_horizontal(data, &grid_cpy, color);
-	grid_draw_vertical(data, &grid_cpy, color);
-	grid_clear(&grid_cpy);
+	grid_draw_horizontal(data, grid_cpy);
+	grid_draw_vertical(data, grid_cpy);
+	grid_clear(grid_cpy);
 }

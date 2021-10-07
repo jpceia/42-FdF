@@ -37,20 +37,20 @@ int	mlx_render(void *ptr)
 	t_mlx	*data;
 
 	data = (t_mlx *)ptr;
-	if (data->mouse.pressed)
+	if (data->mouse->pressed)
 	{
 		mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
 		p.x = x;
 		p.y = y;
-		data->cam.offset = vec2D_add(
-				data->cam.prev_offset,
-				vec2D_subtract(p, data->mouse.pos));
+		data->cam->offset = vec2D_add(
+				data->cam->prev_offset,
+				vec2D_subtract(p, data->mouse->pos));
 	}
-	update_cam(&(data->cam), &(data->pressed));
+	update_cam(data->cam, data->pressed);
 	data->img = mlx_new_image(data->mlx, data->width, data->height);
 	data->addr = mlx_get_data_addr(data->img, &(data->bits_per_pixel),
 			&(data->line_length), &(data->endian));
-	grid_draw(data, vec3D_create(1.0, 1.0, 1.0));
+	grid_draw(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
 	return (1);
