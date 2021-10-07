@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 15:23:30 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/05 22:05:12 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 17:58:12 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MATRIX_H
 
 # include <stdlib.h>
-# include <stdio.h>
 # include "libft.h"
 # include "vec.h"
 
@@ -28,13 +27,6 @@ typedef struct s_matrix
 	int		nrows;
 	float	*data;
 }	t_matrix;
-
-typedef struct s_anglesXYZ
-{
-	float	yaw;
-	float	pitch;
-	float	roll;
-}	t_anglesXYZ;
 
 t_bool		check_matrix_nrows(int nrows, int _nrows);
 t_bool		check_matrix_ncols(int ncols, int _ncols);
