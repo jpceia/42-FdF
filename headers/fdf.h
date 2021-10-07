@@ -67,10 +67,8 @@ typedef struct s_grid
 	int		height;
 }	t_grid;
 
-void		grid_init(t_grid *grid, int width, int height);
-t_grid		grid_clone(const t_grid *grid);
-void		grid_clear(t_grid *grid);
-void		grid_parse_file(t_grid *grid, char *fname);
+t_grid		*grid_parse_file(t_grid **grid, char *fname);
+t_grid		*list_to_grid(t_list *lst, t_grid **grid);
 float		grid_max(const t_grid *grid, t_coord coord);
 float		grid_min(const t_grid *grid, t_coord coord);
 void		grid_apply_transformation(t_grid *grid, t_matrix *M);
