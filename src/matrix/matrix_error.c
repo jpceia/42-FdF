@@ -6,10 +6,11 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 17:30:19 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/06 07:01:06 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 14:03:42 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "matrix.h"
 
 t_bool	check_matrix_nrows(int nrows, int _nrows)

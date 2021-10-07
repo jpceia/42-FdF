@@ -6,13 +6,13 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 02:53:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/22 17:47:10 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 13:53:56 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_trgb	create_trgb(t_vec3D color)
+int	create_trgb(t_vec3D color)
 {
 	color = vec3D_clip(color, 0.0, 1.0);
 	return (

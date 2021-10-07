@@ -6,11 +6,11 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 03:32:53 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/06 07:09:17 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 14:04:16 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <mlx.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <mlx.h>

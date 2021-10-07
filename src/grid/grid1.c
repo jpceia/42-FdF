@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "fdf.h"
 #include "libft.h"
-#include <stdlib.h>
 
 void	grid_init(t_grid *grid, int width, int height)
 {

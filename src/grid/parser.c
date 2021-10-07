@@ -6,13 +6,14 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 18:33:58 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/06 07:24:30 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/07 03:13:46 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include "fdf.h"
 #include "libft.h"
 
@@ -48,7 +49,10 @@ static void	list_to_grid(t_grid *grid, t_list *lst)
 	int		line_nr;
 	t_list	*node;
 
-	grid_init(grid, ft_strwc(lst->content, ' '), ft_lstsize(lst));
+	if (grid_init(grid, ft_strwc(lst->content, ' '), ft_lstsize(lst)) < 0)
+	{
+
+	}
 	line_nr = 0;
 	node = lst;
 	status = 0;

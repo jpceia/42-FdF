@@ -10,10 +10,12 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include "libft.h"
+#include <stdio.h>
 #include <math.h>
 #include <mlx.h>
+#include "fdf.h"
+#include "libft.h"
+
 
 float	calculate_z_scaling(float grid_size, float z_min, float z_max)
 {
@@ -58,6 +60,35 @@ int	camera_init(t_camera *cam, const t_fdf_args *args)
 	return (0);
 }
 
+int	color_grid_init(t_grid *color_grid, const t_grid *grid, const t_vec3D colors[2])
+{
+	int		i;
+	int		j;
+	float	d;
+	float	z[2];
+	
+	i = 0;
+	color_grid->width = grid->width;
+	color_grid->height = grid->height;
+	z[0] = grid_min(grid, COORD_Z);
+	z[1] = grid_max(grid, COORD_Z);
+	d = fmaxf(0.25 * fmaxf(grid->width, grid->height), z[1] - z[0]);
+	if (!grid_init(color_grid, grid->width, grid->height))
+		return (-1);
+	while (i < grid->height)
+	{
+		j = 0;
+		while (j < grid->width)
+		{
+			color_grid->data[i][j] = vec3D_interpolate(
+				colors[0], colors[1], (grid->data[i][j].z - z[0]) / d);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	mlx_data_init(t_mlx *data, const t_fdf_args *args)
 {
 	if (camera_init(&(data->cam), args) < 0)
@@ -66,6 +97,8 @@ void	mlx_data_init(t_mlx *data, const t_fdf_args *args)
 	data->width = args->width;
 	data->height = args->height;
 	data->grid = args->grid;
+	if (color_grid_init(&(data->color_grid), &(args->grid), args->colors) < 0)
+		clean_exit(data, "Failed setting up color-grid");
 	data->win = mlx_new_window(
 			data->mlx, args->width, args->height, args->title);
 	if (!data->win)
@@ -77,6 +110,7 @@ void	mlx_data_init(t_mlx *data, const t_fdf_args *args)
 void	mlx_data_clear(t_mlx *data)
 {
 	grid_clear(&(data->grid));
+	grid_clear(&(data->color_grid));
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx)

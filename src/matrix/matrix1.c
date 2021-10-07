@@ -6,10 +6,11 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:17:16 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/06 07:02:40 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 14:03:54 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "matrix.h"
 
 t_matrix	*matrix_empty(int nrows, int ncols)

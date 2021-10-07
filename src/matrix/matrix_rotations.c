@@ -6,12 +6,11 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 07:57:48 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/05 22:08:55 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/06 14:03:46 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include <stdio.h>
 #include "matrix.h"
 #include "fdf.h"
 
