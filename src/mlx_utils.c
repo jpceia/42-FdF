@@ -102,4 +102,5 @@ void	mlx_data_clear(void *ptr)
 		free(data->mouse);
 	if (data->pressed)
 		free(data->pressed);
+	free(data);
 }
