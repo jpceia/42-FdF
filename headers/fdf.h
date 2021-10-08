@@ -66,6 +66,11 @@
 # define M_BUTTON_PRESS 	4L
 # define M_BUTTON_RELEASE	8L
 # define M_POINTER_MOTION	64L
+# ifdef OS_Linux
+#  define M_DESTROY_NOTIFY 	131072L
+# else
+#  define M_DESTROY_NOTIFY	0L
+# endif
 
 /*
  * Color
