@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:23:36 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/22 16:50:27 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:08:46 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,58 +25,58 @@ typedef enum e_coord
 }	t_coord;
 
 /*
- * vec2D
+ * vec2d
  */
-typedef struct s_vec2D
+typedef struct s_vec2d
 {
 	float	x;
 	float	y;
-}	t_vec2D;
+}	t_vec2d;
 
-t_vec2D	vec2D_create(float x, float y);
-t_vec2D	vec2D_origin(void);
-t_vec2D	vec2D_subtract(t_vec2D q, t_vec2D p);
-t_vec2D	vec2D_add(t_vec2D p, t_vec2D v);
-float	vec2D_coord(t_vec2D p, t_coord coord);
+t_vec2d	vec2d_create(float x, float y);
+t_vec2d	vec2d_origin(void);
+t_vec2d	vec2d_subtract(t_vec2d q, t_vec2d p);
+t_vec2d	vec2d_add(t_vec2d p, t_vec2d v);
+float	vec2d_coord(t_vec2d p, t_coord coord);
 
-t_vec2D	vec2D_scalar_mul(t_vec2D v, float l);
-t_vec2D	vec2D_normalize(t_vec2D v);
-float	vec2D_cross_product(t_vec2D u, t_vec2D v);
-t_vec2D	vec2D_elementwise_product(t_vec2D u, t_vec2D v);
-t_vec2D	vec2D_interpolate(t_vec2D p, t_vec2D q, float t);
+t_vec2d	vec2d_scalar_mul(t_vec2d v, float l);
+t_vec2d	vec2d_normalize(t_vec2d v);
+float	vec2d_cross_product(t_vec2d u, t_vec2d v);
+t_vec2d	vec2d_elementwise_product(t_vec2d u, t_vec2d v);
+t_vec2d	vec2d_interpolate(t_vec2d p, t_vec2d q, float t);
 
-float	vec2D_dot_product(t_vec2D u, t_vec2D v);
-float	vec2D_norm_squared(t_vec2D v);
-float	vec2D_norm(t_vec2D v);
-float	vec2D_angle(t_vec2D u, t_vec2D v);
-t_vec2D	vec2D_clip(t_vec2D v, float a, float b);
+float	vec2d_dot_product(t_vec2d u, t_vec2d v);
+float	vec2d_norm_squared(t_vec2d v);
+float	vec2d_norm(t_vec2d v);
+float	vec2d_angle(t_vec2d u, t_vec2d v);
+t_vec2d	vec2d_clip(t_vec2d v, float a, float b);
 /*
- * vec3D
+ * vec3d
  */
 
-typedef struct s_vec3D
+typedef struct s_vec3d
 {
 	float	x;
 	float	y;
 	float	z;
-}	t_vec3D;
+}	t_vec3d;
 
-t_vec3D	vec3D_create(float x, float y, float z);
-t_vec3D	vec3D_origin(void);
-t_vec3D	vec3D_subtract(t_vec3D q, t_vec3D p);
-t_vec3D	vec3D_add(t_vec3D p, t_vec3D v);
-float	vec3D_coord(t_vec3D p, t_coord coord);
+t_vec3d	vec3d_create(float x, float y, float z);
+t_vec3d	vec3d_origin(void);
+t_vec3d	vec3d_subtract(t_vec3d q, t_vec3d p);
+t_vec3d	vec3d_add(t_vec3d p, t_vec3d v);
+float	vec3d_coord(t_vec3d p, t_coord coord);
 
-t_vec3D	vec3D_scalar_mul(t_vec3D v, float l);
-t_vec3D	vec3D_normalize(t_vec3D v);
-t_vec3D	vec3D_cross_product(t_vec3D u, t_vec3D v);
-t_vec3D	vec3D_elementwise_product(t_vec3D u, t_vec3D v);
-t_vec3D	vec3D_interpolate(t_vec3D p, t_vec3D q, float t);
+t_vec3d	vec3d_scalar_mul(t_vec3d v, float l);
+t_vec3d	vec3d_normalize(t_vec3d v);
+t_vec3d	vec3d_cross_product(t_vec3d u, t_vec3d v);
+t_vec3d	vec3d_elementwise_product(t_vec3d u, t_vec3d v);
+t_vec3d	vec3d_interpolate(t_vec3d p, t_vec3d q, float t);
 
-float	vec3D_dot_product(t_vec3D u, t_vec3D v);
-float	vec3D_norm_squared(t_vec3D v);
-float	vec3D_norm(t_vec3D v);
-float	vec3D_angle(t_vec3D u, t_vec3D v);
-t_vec3D	vec3D_clip(t_vec3D v, float a, float b);
+float	vec3d_dot_product(t_vec3d u, t_vec3d v);
+float	vec3d_norm_squared(t_vec3d v);
+float	vec3d_norm(t_vec3d v);
+float	vec3d_angle(t_vec3d u, t_vec3d v);
+t_vec3d	vec3d_clip(t_vec3d v, float a, float b);
 
 #endif

@@ -77,7 +77,7 @@ int	mouse_press(int button, int x, int y, t_mlx *data)
 	if (button == 1)
 	{
 		data->mouse->pressed = 1;
-		data->mouse->pos = vec2D_create(x, y);
+		data->mouse->pos = vec2d_create(x, y);
 	}
 	else if (button == 4)
 		data->cam->scaling *= 1.05;
@@ -93,8 +93,8 @@ int	mouse_release(int button, int x, int y, t_mlx *data)
 	if (button == 1)
 	{
 		data->mouse->pressed = 0;
-		data->cam->offset = vec2D_add(data->cam->prev_offset,
-				vec2D_subtract(vec2D_create(x, y),
+		data->cam->offset = vec2d_add(data->cam->prev_offset,
+				vec2d_subtract(vec2d_create(x, y),
 					data->mouse->pos));
 		data->cam->prev_offset = data->cam->offset;
 	}

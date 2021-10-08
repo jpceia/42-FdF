@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/07 23:57:40 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:08:46 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_grid	*grid_apply_transformation(t_grid *grid, t_matrix *M)
 		j = 0;
 		while (j < grid->width)
 		{
-			grid->data[i][j] = matrix_homogenous_mul_vec3D(M, grid->data[i][j]);
+			grid->data[i][j] = matrix_homogenous_mul_vec3d(M, grid->data[i][j]);
 			j++;
 		}
 		i++;
@@ -35,8 +35,8 @@ t_grid	*grid_apply_transformation(t_grid *grid, t_matrix *M)
 
 void	grid_draw_horizontal(t_mlx *data, const t_grid *grid)
 {
-	t_vec2D	p[2];
-	t_vec3D	color[2];
+	t_vec2d	p[2];
+	t_vec3d	color[2];
 	int		i;
 	int		j;
 
@@ -61,8 +61,8 @@ void	grid_draw_horizontal(t_mlx *data, const t_grid *grid)
 
 void	grid_draw_vertical(t_mlx *data, const t_grid *grid)
 {
-	t_vec2D	p[2];
-	t_vec3D	color[2];
+	t_vec2d	p[2];
+	t_vec3d	color[2];
 	int		i;
 	int		j;
 

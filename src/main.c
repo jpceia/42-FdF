@@ -29,12 +29,9 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	args.title = WIN_TITLE;
-	args.screen_size = vec2D_create(WIN_WIDTH, WIN_HEIGHT);
+	args.screen_size = vec2d_create(WIN_WIDTH, WIN_HEIGHT);
 	args.fname = argv[1];
-	args.colors[0] = vec3D_create(0, 1, 1);
-	args.colors[1] = vec3D_create(1, 0, 0);
-	mlx_data_init(&data, &args);
-	mlx_add_hooks(&data);
-	mlx_loop(data.mlx);
+	args.colors[0] = vec3d_create(1, 1, 1);
+	args.colors[1] = vec3d_create(0, 1, 0);
 	return (EXIT_SUCCESS);
 }

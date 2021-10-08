@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 07:16:53 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/06 14:04:04 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:14:43 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "fdf.h"
 #include "matrix.h"
 
-t_matrix	*matrix_scaling3D(t_vec3D s)
+t_matrix	*matrix_scaling3d(t_vec3d s)
 {
 	t_matrix	*M;
 
@@ -27,14 +27,14 @@ t_matrix	*matrix_scaling3D(t_vec3D s)
 	return (M);
 }
 
-t_vec3D	matrix_mul_vec3D(t_matrix *M, t_vec3D p)
+t_vec3d	matrix_mul_vec3d(t_matrix *M, t_vec3d p)
 {
-	t_vec3D	q;
+	t_vec3d	q;
 
 	if (!M)
-		return (vec3D_origin());
+		return (vec3d_origin());
 	if (!check_matrix_ncols(M->ncols, 3) || !check_matrix_nrows(M->nrows, 3))
-		return (vec3D_origin());
+		return (vec3d_origin());
 	q.x = M->data[0] * p.x + M->data[1] * p.y + M->data[2] * p.z;
 	q.y = M->data[3] * p.x + M->data[4] * p.y + M->data[5] * p.z;
 	q.z = M->data[6] * p.x + M->data[7] * p.y + M->data[8] * p.z;
@@ -67,7 +67,7 @@ t_matrix	*matrix_homogeneous_from3x3(t_matrix *A, t_bool do_free)
 	return (M);
 }
 
-t_matrix	*matrix_homogenous_translation(t_vec3D v)
+t_matrix	*matrix_homogenous_translation(t_vec3d v)
 {
 	t_matrix	*M;
 
@@ -84,19 +84,19 @@ t_matrix	*matrix_homogenous_translation(t_vec3D v)
 	return (M);
 }
 
-t_vec3D	matrix_homogenous_mul_vec3D(t_matrix *M, t_vec3D p)
+t_vec3d	matrix_homogenous_mul_vec3d(t_matrix *M, t_vec3d p)
 {
 	float	w;
-	t_vec3D	q;
+	t_vec3d	q;
 
 	if (!M)
-		return (vec3D_origin());
+		return (vec3d_origin());
 	if (!check_matrix_ncols(M->ncols, 4) || !check_matrix_nrows(M->nrows, 4))
-		return (vec3D_origin());
+		return (vec3d_origin());
 	if (M->data[15] != 1.0)
 	{
 		perror("Non homogeous matrix (M_44 != 1)");
-		return (vec3D_origin());
+		return (vec3d_origin());
 	}
 	w = M->data[12] * p.x + M->data[13] * p.y
 		+ M->data[14] * p.z + M->data[15];

@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:28:04 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/07 12:51:31 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:14:39 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ t_matrix	*camera_transform(const t_camera *cam)
 	t_matrix	*M;
 
 	T = matrix_homogenous_translation(cam->translation);
-	Sz = matrix_scaling3D(vec3D_create(1, 1, cam->z_scaling));
+	Sz = matrix_scaling3d(vec3d_create(1, 1, cam->z_scaling));
 	Sz = matrix_homogeneous_from3x3(Sz, true);
 	R = matrix3x3_rotation_xyz(cam->angles);
 	R = matrix_homogeneous_from3x3(R, true);
-	S = matrix_scaling3D(vec3D_create(cam->scaling, cam->scaling, 0.0));
+	S = matrix_scaling3d(vec3d_create(cam->scaling, cam->scaling, 0.0));
 	S = matrix_homogeneous_from3x3(S, true);
 	M = matrix_mul(Sz, T, true);
 	M = matrix_mul(R, M, true);
 	M = matrix_mul(S, M, true);
 	T = matrix_homogenous_translation(
-			vec3D_create(cam->offset.x, cam->offset.y, 0.0));
+			vec3d_create(cam->offset.x, cam->offset.y, 0.0));
 	M = matrix_mul(T, M, true);
 	return (M);
 }
@@ -56,7 +56,7 @@ t_matrix	*camera_view_transform(t_camera	*cam)
 }
 
 t_camera	*camera_init(t_camera **cam, const t_grid *grid,
-		t_vec2D screen_size)
+		t_vec2d screen_size)
 {
 	float		z[2];
 	t_matrix	*M;
@@ -66,11 +66,11 @@ t_camera	*camera_init(t_camera **cam, const t_grid *grid,
 		return (clean_exit(*cam, "Error alocating memory", NULL, 0));
 	z[0] = grid_min(grid, COORD_Z);
 	z[1] = grid_max(grid, COORD_Z);
-	(*cam)->translation = vec3D_scalar_mul(vec3D_create(grid->width - 1,
+	(*cam)->translation = vec3d_scalar_mul(vec3d_create(grid->width - 1,
 				grid->height - 1, z[0] + z[1]), -0.5);
 	(*cam)->z_scaling = calculate_z_scaling(
 			fmaxf(grid->height, grid->width), z[0], z[1]);
-	(*cam)->angles = vec3D_create(atanf(1 / sqrtf(2)), 0.0, M_PI / 4);
+	(*cam)->angles = vec3d_create(atanf(1 / sqrtf(2)), 0.0, M_PI / 4);
 	M = camera_view_transform(*cam);
 	if (!M)
 		return (clean_exit(*cam, "Error in matrix operations", free, 0));
@@ -79,7 +79,7 @@ t_camera	*camera_init(t_camera **cam, const t_grid *grid,
 	z[1] = screen_size.y / (fabsf(matrix_at(M, 1, 0)) * grid->width
 			+ fabsf(matrix_at(M, 1, 1)) * grid->height);
 	(*cam)->scaling = fminf(z[0], z[1]);
-	(*cam)->offset = vec2D_create(0.5 * screen_size.x, 0.5 * screen_size.y);
+	(*cam)->offset = vec2d_create(0.5 * screen_size.x, 0.5 * screen_size.y);
 	(*cam)->prev_offset = (*cam)->offset;
 	matrix_clear(M);
 	return (*cam);

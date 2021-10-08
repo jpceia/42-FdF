@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 07:57:48 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/06 14:03:46 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:08:46 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_matrix	*matrix3x3_rotation_z(float theta)
 	return (M);
 }
 
-t_matrix	*matrix3x3_rotation_xyz(t_vec3D angles)
+t_matrix	*matrix3x3_rotation_xyz(t_vec3d angles)
 {
 	t_matrix	*M;
 

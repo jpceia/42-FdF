@@ -27,7 +27,7 @@ void	*clean_exit(void *data, char *msg, void (*del)(void *), int do_exit)
 }
 
 t_grid	*color_grid_init(t_grid **color_grid, const t_grid *grid,
-		const t_vec3D colors[2])
+		const t_vec3d colors[2])
 {
 	int		i;
 	int		j;
@@ -47,7 +47,7 @@ t_grid	*color_grid_init(t_grid **color_grid, const t_grid *grid,
 		j = 0;
 		while (j < grid->width)
 		{
-			(*color_grid)->data[i][j] = vec3D_interpolate(
+			(*color_grid)->data[i][j] = vec3d_interpolate(
 					colors[0], colors[1], (grid->data[i][j].z - z[0]) / d);
 			j++;
 		}

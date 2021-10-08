@@ -18,18 +18,18 @@
 t_grid	*grid_init(t_grid **grid, int width, int height)
 {
 	int		index;
-	t_vec3D	*arr;
+	t_vec3d	*arr;
 
 	*grid = (t_grid *)malloc(sizeof(**grid));
 	if (!*grid)
 		return (clean_exit(NULL, "Error allocating memory", NULL, 0));
-	(*grid)->data = (t_vec3D **)malloc(height * sizeof(*((*grid)->data)));
+	(*grid)->data = malloc(height * sizeof(arr));
 	if (!(*grid)->data)
 		return (clean_exit(*grid, "Error allocating memory to grid", free, 0));
 	index = 0;
 	while (index < height)
 	{
-		arr = (t_vec3D *)malloc(width * sizeof(*arr));
+		arr = (t_vec3d *)malloc(width * sizeof(*arr));
 		if (!arr)
 			return (clean_exit(*grid, "Error assigning memory to array",
 					grid_clear, 0));
@@ -92,14 +92,14 @@ float	grid_max(const t_grid *grid, t_coord coord)
 	int		i;
 	int		j;
 
-	v_max = vec3D_coord(grid->data[0][0], coord);
+	v_max = vec3d_coord(grid->data[0][0], coord);
 	i = 0;
 	while (i < grid->height)
 	{
 		j = 0;
 		while (j < grid->width - 1)
 		{
-			v = vec3D_coord(grid->data[i][j], coord);
+			v = vec3d_coord(grid->data[i][j], coord);
 			if (v_max < v)
 				v_max = v;
 			j++;
@@ -116,14 +116,14 @@ float	grid_min(const t_grid *grid, t_coord coord)
 	int		i;
 	int		j;
 
-	v_min = vec3D_coord(grid->data[0][0], coord);
+	v_min = vec3d_coord(grid->data[0][0], coord);
 	i = 0;
 	while (i < grid->height)
 	{
 		j = 0;
 		while (j < grid->width - 1)
 		{
-			v = vec3D_coord(grid->data[i][j], coord);
+			v = vec3d_coord(grid->data[i][j], coord);
 			if (v_min > v)
 				v_min = v;
 			j++;

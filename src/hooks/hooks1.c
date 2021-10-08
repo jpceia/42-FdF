@@ -33,7 +33,7 @@ int	mlx_render(void *ptr)
 {
 	int		x;
 	int		y;
-	t_vec2D	p;
+	t_vec2d	p;
 	t_mlx	*data;
 
 	data = (t_mlx *)ptr;
@@ -42,9 +42,9 @@ int	mlx_render(void *ptr)
 		mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
 		p.x = x;
 		p.y = y;
-		data->cam->offset = vec2D_add(
+		data->cam->offset = vec2d_add(
 				data->cam->prev_offset,
-				vec2D_subtract(p, data->mouse->pos));
+				vec2d_subtract(p, data->mouse->pos));
 	}
 	update_cam(data->cam, data->pressed);
 	data->img = mlx_new_image(data->mlx, data->width, data->height);

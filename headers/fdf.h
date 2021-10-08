@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/07 22:03:51 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:08:46 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
  * Color
  */
 
-int			create_trgb(t_vec3D color);
+int			create_trgb(t_vec3d color);
 
 /*
  * Grid Utils
@@ -60,7 +60,7 @@ int			create_trgb(t_vec3D color);
 
 typedef struct s_grid
 {
-	t_vec3D	**data;
+	t_vec3d	**data;
 	int		width;
 	int		height;
 }	t_grid;
@@ -85,16 +85,16 @@ void		ft_putfloat(float x);
  */
 typedef struct s_mouse
 {
-	t_vec2D			pos;
+	t_vec2d			pos;
 	unsigned int	pressed;
 }	t_mouse;
 
 typedef struct s_camera
 {
-	t_vec3D	translation;
-	t_vec3D	angles;
-	t_vec2D	prev_offset;
-	t_vec2D	offset;
+	t_vec3d	translation;
+	t_vec3d	angles;
+	t_vec2d	prev_offset;
+	t_vec2d	offset;
 	float	z_scaling;
 	float	scaling;
 }	t_camera;
@@ -105,8 +105,8 @@ typedef struct s_args
 {
 	char	*title;
 	char	*fname;
-	t_vec2D	screen_size;
-	t_vec3D	colors[2];
+	t_vec2d	screen_size;
+	t_vec3d	colors[2];
 }	t_args;
 
 typedef struct s_keys
@@ -139,15 +139,15 @@ typedef struct s_mlx
 	t_keys		*pressed;
 }	t_mlx;
 
-void		plot_pixel(t_mlx *data, t_vec2D p, t_vec3D color);
-void		plot_line(t_mlx *data, t_vec2D p[2], t_vec3D color[2]);
+void		plot_pixel(t_mlx *data, t_vec2d p, t_vec3d color);
+void		plot_line(t_mlx *data, t_vec2d p[2], t_vec3d color[2]);
 void		grid_draw(t_mlx *data);
 
 void		mlx_data_clear(void *ptr);
 void		*clean_exit(void *data, char *msg, void (*del)(void *),
 				int do_exit);
 t_camera	*camera_init(t_camera **cam, const t_grid *grid,
-				t_vec2D screen_size);
+				t_vec2d screen_size);
 t_mlx		*mlx_data_init(t_mlx *data, const t_args *args);
 
 void		mlx_add_hooks(t_mlx *data);

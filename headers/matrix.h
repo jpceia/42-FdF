@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 15:23:30 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/06 17:58:12 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:15:03 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ t_matrix	*matrix_transpose(t_matrix	*M, t_bool do_free);
 t_matrix	*matrix3x3_rotation_x(float theta);
 t_matrix	*matrix3x3_rotation_y(float theta);
 t_matrix	*matrix3x3_rotation_z(float theta);
-t_matrix	*matrix3x3_rotation_xyz(t_vec3D	angles);
+t_matrix	*matrix3x3_rotation_xyz(t_vec3d	angles);
 
-t_matrix	*matrix_scaling3D(t_vec3D s);
-t_vec3D		matrix_mul_vec3D(t_matrix *M, t_vec3D p);
+t_matrix	*matrix_scaling3d(t_vec3d s);
+t_vec3d		matrix_mul_vec3d(t_matrix *M, t_vec3d p);
 t_matrix	*matrix_homogeneous_from3x3(t_matrix *A, t_bool do_free);
-t_matrix	*matrix_homogenous_translation(t_vec3D v);
-t_vec3D		matrix_homogenous_mul_vec3D(t_matrix *M, t_vec3D p);
+t_matrix	*matrix_homogenous_translation(t_vec3d v);
+t_vec3d		matrix_homogenous_mul_vec3d(t_matrix *M, t_vec3d p);
 
 #endif

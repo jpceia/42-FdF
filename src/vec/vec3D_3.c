@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 09:39:38 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/06 07:23:09 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:16:28 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 #include "libft.h"
 #include "vec.h"
 
-float	vec3D_norm_squared(t_vec3D v)
+float	vec3d_norm_squared(t_vec3d v)
 {
 	return (v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
-float	vec3D_norm(t_vec3D v)
+float	vec3d_norm(t_vec3d v)
 {
-	return (sqrtf(vec3D_norm_squared(v)));
+	return (sqrtf(vec3d_norm_squared(v)));
 }
 
-float	vec3D_angle(t_vec3D u, t_vec3D v)
+float	vec3d_angle(t_vec3d u, t_vec3d v)
 {
 	float	norm_u;
 	float	norm_v;
 	float	dot_uv;
 
-	dot_uv = vec3D_dot_product(u, v);
+	dot_uv = vec3d_dot_product(u, v);
 	if (dot_uv == 0)
 		return (0);
-	norm_u = vec3D_norm(u);
-	norm_v = vec3D_norm(v);
+	norm_u = vec3d_norm(u);
+	norm_v = vec3d_norm(v);
 	if (norm_u == 0 || norm_v == 0)
 	{
 		perror("Vector with zero length");
@@ -44,7 +44,7 @@ float	vec3D_angle(t_vec3D u, t_vec3D v)
 	return (dot_uv / norm_u / norm_v);
 }
 
-t_vec3D	vec3D_elementwise_product(t_vec3D u, t_vec3D v)
+t_vec3d	vec3d_elementwise_product(t_vec3d u, t_vec3d v)
 {
 	u.x *= v.x;
 	u.y *= v.y;
@@ -52,7 +52,7 @@ t_vec3D	vec3D_elementwise_product(t_vec3D u, t_vec3D v)
 	return (u);
 }
 
-t_vec3D	vec3D_clip(t_vec3D v, float a, float b)
+t_vec3d	vec3d_clip(t_vec3d v, float a, float b)
 {
 	v.x = fminf(fmaxf(v.x, a), b);
 	v.y = fminf(fmaxf(v.y, a), b);

@@ -6,13 +6,13 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 18:33:58 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/07 23:36:39 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:08:46 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_vec3D	*grid_append_line(int line_nr, int N, char *line, t_vec3D *arr)
+t_vec3d	*grid_append_line(int line_nr, int N, char *line, t_vec3d *arr)
 {
 	char	**s_split;
 	int		index;
@@ -26,7 +26,7 @@ t_vec3D	*grid_append_line(int line_nr, int N, char *line, t_vec3D *arr)
 	index = 0;
 	while (index < N)
 	{
-		arr[index] = vec3D_create(index, line_nr, get_nbr(s_split[index]));
+		arr[index] = vec3d_create(index, line_nr, get_nbr(s_split[index]));
 		index++;
 	}
 	ft_str_array_clear(s_split, N);
