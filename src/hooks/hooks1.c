@@ -42,7 +42,6 @@ int	mlx_render(void *ptr)
 	grid_draw(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
-	check_leaks();
 	return (1);
 }
 
@@ -63,7 +62,7 @@ int	mouse_move(int x, int y, t_mlx *data)
 
 void	mlx_add_hooks(t_mlx *data)
 {
-	mlx_hook(data->win, DESTROY_NOTIFY, M_DESTROY_NOTIFY, exit_handle, data);
+	mlx_hook(data->win, DESTROY_NOTIFY, M_NO_EVENT, exit_handle, data);
 	mlx_hook(data->win, KEY_PRESS, M_KEY_PRESS, key_press, data);
 	mlx_hook(data->win, KEY_RELEASE, M_KEY_RELEASE, key_release, data);
 	mlx_hook(data->win, BUTTON_PRESS, M_BUTTON_PRESS, mouse_press, data);

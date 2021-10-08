@@ -51,26 +51,17 @@
 # define BUTTON_PRESS	04
 # define BUTTON_RELEASE 05
 # define MOTION_NOTIFY	06
-# ifdef OS_Linux
-#  define DESTROY_NOTIFY	17
-# else
-#  define DESTROY_NOTIFY	33
-# endif
+# define DESTROY_NOTIFY	17
 
 /*
  * X11 Masks
  */
-# define M_NO_EVENT			0L // 131072
+# define M_NO_EVENT			0L
 # define M_KEY_PRESS		1L
 # define M_KEY_RELEASE		2L
 # define M_BUTTON_PRESS 	4L
 # define M_BUTTON_RELEASE	8L
 # define M_POINTER_MOTION	64L
-# ifdef OS_Linux
-#  define M_DESTROY_NOTIFY 	131072L
-# else
-#  define M_DESTROY_NOTIFY	0L
-# endif
 
 /*
  * Color
