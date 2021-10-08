@@ -58,7 +58,7 @@ t_grid	*color_grid_init(t_grid **color_grid, const t_grid *grid,
 
 t_mlx	*mlx_data_init(t_mlx *data, const t_args *args)
 {
-	if (!grid_parse_file(&(data->grid), args->fname))
+	if (!grid_parse_file(args->fname, &(data->grid)))
 		clean_exit(data, "Failed to parse grid from file", mlx_data_clear, 1);
 	if (!camera_init(&(data->cam), data->grid, args->screen_size))
 		clean_exit(data, "Failed setting up the camera", mlx_data_clear, 1);
