@@ -19,7 +19,7 @@ OS			= $(shell uname)
 ifeq ($(OS), Linux)
 	MLX_INC_DIR	= /usr/local/include
 	MLX_DIR		= /usr/local/lib
-	OS_FLAG		= -D OS_Linux
+	FLAG_OS		= -D OS_Linux
 	FLAGS_MLX	=  -Lmlx_Linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lz
 else
 	MLX_INC_DIR	= ./minilibx_macos
@@ -29,9 +29,10 @@ endif
 FLAGS_WARN	= -Wall -Wextra -Werror
 FLAGS_INC	= -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_INC_DIR)
 FLAGS_DEBUG	= -g
+FLAGS_OPT	= -O3
 FLAGS_LIBFT = -L$(LIBFT_DIR) -lft
-CFLAGS		= $(FLAGS_WARN) $(FLAGS_INC) $(OS_FLAG)
-LDFLAGS		= $(FLAGS_LIBFT) $(FLAGS_MLX) -lm
+CFLAGS		= $(FLAGS_WARN) $(FLAGS_INC) $(FLAGS_OPT) $(FLAG_OS)
+LDFLAGS		= $(FLAGS_LIBFT) $(FLAGS_MLX) $(FLAGS_OPT) -lm
 
 $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
