@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 07:57:48 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/08 01:08:46 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:18:55 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,55 +16,55 @@
 
 t_matrix	*matrix3x3_rotation_x(float theta)
 {
-	t_matrix	*M;
+	t_matrix	*m;
 
-	M = matrix_zeros(3, 3);
-	if (!M)
+	m = matrix_zeros(3, 3);
+	if (!m)
 		return (NULL);
-	M->data[0] = 1.0;
-	M->data[4] = cos(theta);
-	M->data[5] = -sin(theta);
-	M->data[7] = sin(theta);
-	M->data[8] = cos(theta);
-	return (M);
+	m->data[0] = 1.0;
+	m->data[4] = cos(theta);
+	m->data[5] = -sin(theta);
+	m->data[7] = sin(theta);
+	m->data[8] = cos(theta);
+	return (m);
 }
 
 t_matrix	*matrix3x3_rotation_y(float theta)
 {
-	t_matrix	*M;
+	t_matrix	*m;
 
-	M = matrix_zeros(3, 3);
-	if (!M)
+	m = matrix_zeros(3, 3);
+	if (!m)
 		return (NULL);
-	M->data[0] = cos(theta);
-	M->data[2] = sin(theta);
-	M->data[4] = 1.0;
-	M->data[6] = -sin(theta);
-	M->data[8] = cos(theta);
-	return (M);
+	m->data[0] = cos(theta);
+	m->data[2] = sin(theta);
+	m->data[4] = 1.0;
+	m->data[6] = -sin(theta);
+	m->data[8] = cos(theta);
+	return (m);
 }
 
 t_matrix	*matrix3x3_rotation_z(float theta)
 {
-	t_matrix	*M;
+	t_matrix	*m;
 
-	M = matrix_zeros(3, 3);
-	if (!M)
+	m = matrix_zeros(3, 3);
+	if (!m)
 		return (NULL);
-	M->data[0] = cos(theta);
-	M->data[1] = -sin(theta);
-	M->data[3] = sin(theta);
-	M->data[4] = cos(theta);
-	M->data[8] = 1.0;
-	return (M);
+	m->data[0] = cos(theta);
+	m->data[1] = -sin(theta);
+	m->data[3] = sin(theta);
+	m->data[4] = cos(theta);
+	m->data[8] = 1.0;
+	return (m);
 }
 
 t_matrix	*matrix3x3_rotation_xyz(t_vec3d angles)
 {
-	t_matrix	*M;
+	t_matrix	*m;
 
-	M = matrix3x3_rotation_z(angles.z);
-	M = matrix_mul(matrix3x3_rotation_y(angles.y), M, true);
-	M = matrix_mul(matrix3x3_rotation_x(angles.x), M, true);
-	return (M);
+	m = matrix3x3_rotation_z(angles.z);
+	m = matrix_mul(matrix3x3_rotation_y(angles.y), m, true);
+	m = matrix_mul(matrix3x3_rotation_x(angles.x), m, true);
+	return (m);
 }

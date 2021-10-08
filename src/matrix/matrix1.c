@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:17:16 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/06 14:03:54 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:18:55 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,47 @@
 
 t_matrix	*matrix_empty(int nrows, int ncols)
 {
-	t_matrix	*M;
+	t_matrix	*m;
 
 	if (nrows <= 0 || ncols <= 0)
 		return (NULL);
-	M = (t_matrix *)malloc(sizeof(*M));
-	M->nrows = nrows;
-	M->ncols = ncols;
-	if (!M)
-		return (M);
-	M->data = (float *)malloc(nrows * ncols * sizeof(*(M->data)));
-	if (!(M->data))
+	m = (t_matrix *)malloc(sizeof(*m));
+	m->nrows = nrows;
+	m->ncols = ncols;
+	if (!m)
+		return (m);
+	m->data = (float *)malloc(nrows * ncols * sizeof(*(m->data)));
+	if (!(m->data))
 	{
-		free(M);
+		free(m);
 		return (NULL);
 	}
-	return (M);
+	return (m);
 }
 
-void	matrix_clear(t_matrix *M)
+void	matrix_clear(t_matrix *m)
 {
-	if (M)
+	if (m)
 	{
-		if (M->data)
-			free(M->data);
-		free(M);
-		M = NULL;
+		if (m->data)
+			free(m->data);
+		free(m);
+		m = NULL;
 	}
 }
 
 t_matrix	*matrix_zeros(int nrows, int ncols)
 {
 	int			idx;
-	t_matrix	*M;
+	t_matrix	*m;
 
-	M = matrix_empty(nrows, ncols);
-	if (!M)
+	m = matrix_empty(nrows, ncols);
+	if (!m)
 		return (NULL);
 	idx = 0;
 	while (idx < nrows * ncols)
-		M->data[idx++] = 0;
-	return (M);
+		m->data[idx++] = 0;
+	return (m);
 }
 
 float	matrix_at(t_matrix *A, int i, int j)

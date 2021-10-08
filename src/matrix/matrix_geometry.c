@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 07:16:53 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/08 01:14:43 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:18:55 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,95 +16,95 @@
 
 t_matrix	*matrix_scaling3d(t_vec3d s)
 {
-	t_matrix	*M;
+	t_matrix	*m;
 
-	M = matrix_zeros(3, 3);
-	if (!M)
+	m = matrix_zeros(3, 3);
+	if (!m)
 		return (NULL);
-	M->data[0] = s.x;
-	M->data[4] = s.y;
-	M->data[8] = s.z;
-	return (M);
+	m->data[0] = s.x;
+	m->data[4] = s.y;
+	m->data[8] = s.z;
+	return (m);
 }
 
-t_vec3d	matrix_mul_vec3d(t_matrix *M, t_vec3d p)
+t_vec3d	matrix_mul_vec3d(t_matrix *m, t_vec3d p)
 {
 	t_vec3d	q;
 
-	if (!M)
+	if (!m)
 		return (vec3d_origin());
-	if (!check_matrix_ncols(M->ncols, 3) || !check_matrix_nrows(M->nrows, 3))
+	if (!check_matrix_ncols(m->ncols, 3) || !check_matrix_nrows(m->nrows, 3))
 		return (vec3d_origin());
-	q.x = M->data[0] * p.x + M->data[1] * p.y + M->data[2] * p.z;
-	q.y = M->data[3] * p.x + M->data[4] * p.y + M->data[5] * p.z;
-	q.z = M->data[6] * p.x + M->data[7] * p.y + M->data[8] * p.z;
+	q.x = m->data[0] * p.x + m->data[1] * p.y + m->data[2] * p.z;
+	q.y = m->data[3] * p.x + m->data[4] * p.y + m->data[5] * p.z;
+	q.z = m->data[6] * p.x + m->data[7] * p.y + m->data[8] * p.z;
 	return (q);
 }
 
 t_matrix	*matrix_homogeneous_from3x3(t_matrix *A, t_bool do_free)
 {
-	t_matrix	*M;
+	t_matrix	*m;
 
 	if (!A)
 		return (NULL);
 	if (!check_matrix_ncols(A->ncols, 3) || !check_matrix_nrows(A->nrows, 3))
 		return (NULL);
-	M = matrix_zeros(4, 4);
-	if (!M)
+	m = matrix_zeros(4, 4);
+	if (!m)
 		return (NULL);
-	M->data[0] = A->data[0];
-	M->data[1] = A->data[1];
-	M->data[2] = A->data[2];
-	M->data[4] = A->data[3];
-	M->data[5] = A->data[4];
-	M->data[6] = A->data[5];
-	M->data[8] = A->data[6];
-	M->data[9] = A->data[7];
-	M->data[10] = A->data[8];
-	M->data[15] = 1.0;
+	m->data[0] = A->data[0];
+	m->data[1] = A->data[1];
+	m->data[2] = A->data[2];
+	m->data[4] = A->data[3];
+	m->data[5] = A->data[4];
+	m->data[6] = A->data[5];
+	m->data[8] = A->data[6];
+	m->data[9] = A->data[7];
+	m->data[10] = A->data[8];
+	m->data[15] = 1.0;
 	if (do_free)
 		matrix_clear(A);
-	return (M);
+	return (m);
 }
 
 t_matrix	*matrix_homogenous_translation(t_vec3d v)
 {
-	t_matrix	*M;
+	t_matrix	*m;
 
-	M = matrix_zeros(4, 4);
-	if (!M)
+	m = matrix_zeros(4, 4);
+	if (!m)
 		return (NULL);
-	M->data[0] = 1.0;
-	M->data[3] = v.x;
-	M->data[5] = 1.0;
-	M->data[7] = v.y;
-	M->data[10] = 1.0;
-	M->data[11] = v.z;
-	M->data[15] = 1.0;
-	return (M);
+	m->data[0] = 1.0;
+	m->data[3] = v.x;
+	m->data[5] = 1.0;
+	m->data[7] = v.y;
+	m->data[10] = 1.0;
+	m->data[11] = v.z;
+	m->data[15] = 1.0;
+	return (m);
 }
 
-t_vec3d	matrix_homogenous_mul_vec3d(t_matrix *M, t_vec3d p)
+t_vec3d	matrix_homogenous_mul_vec3d(t_matrix *m, t_vec3d p)
 {
 	float	w;
 	t_vec3d	q;
 
-	if (!M)
+	if (!m)
 		return (vec3d_origin());
-	if (!check_matrix_ncols(M->ncols, 4) || !check_matrix_nrows(M->nrows, 4))
+	if (!check_matrix_ncols(m->ncols, 4) || !check_matrix_nrows(m->nrows, 4))
 		return (vec3d_origin());
-	if (M->data[15] != 1.0)
+	if (m->data[15] != 1.0)
 	{
 		perror("Non homogeous matrix (M_44 != 1)");
 		return (vec3d_origin());
 	}
-	w = M->data[12] * p.x + M->data[13] * p.y
-		+ M->data[14] * p.z + M->data[15];
-	q.x = (M->data[0] * p.x + M->data[1] * p.y
-			+ M->data[2] * p.z + M->data[3]) / w;
-	q.y = (M->data[4] * p.x + M->data[5] * p.y
-			+ M->data[6] * p.z + M->data[7]) / w;
-	q.z = (M->data[8] * p.x + M->data[9] * p.y
-			+ M->data[10] * p.z + M->data[11]) / w;
+	w = m->data[12] * p.x + m->data[13] * p.y
+		+ m->data[14] * p.z + m->data[15];
+	q.x = (m->data[0] * p.x + m->data[1] * p.y
+			+ m->data[2] * p.z + m->data[3]) / w;
+	q.y = (m->data[4] * p.x + m->data[5] * p.y
+			+ m->data[6] * p.z + m->data[7]) / w;
+	q.z = (m->data[8] * p.x + m->data[9] * p.y
+			+ m->data[10] * p.z + m->data[11]) / w;
 	return (q);
 }

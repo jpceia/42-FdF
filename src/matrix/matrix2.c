@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:18:41 by jceia             #+#    #+#             */
-/*   Updated: 2021/09/24 15:53:26 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:21:58 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	matrix_pair_clear(t_matrix *A, t_matrix *B)
 t_matrix	*matrix_mul(t_matrix *A, t_matrix *B, t_bool do_free)
 {
 	int			idx[3];
-	t_matrix	*M;
+	t_matrix	*m;
 
 	if (!A || !B || !check_matrix_ncols(A->ncols, B->nrows))
 		return (NULL);
-	M = matrix_zeros(A->nrows, B->ncols);
+	m = matrix_zeros(A->nrows, B->ncols);
 	idx[0] = -1;
 	while (++idx[0] < A->nrows)
 	{
@@ -34,20 +34,20 @@ t_matrix	*matrix_mul(t_matrix *A, t_matrix *B, t_bool do_free)
 		{
 			idx[2] = -1;
 			while (++idx[2] < A->ncols)
-				M->data[idx[0] * M->ncols + idx[1]] += \
+				m->data[idx[0] * m->ncols + idx[1]] += \
 					matrix_at(A, idx[0], idx[2]) * matrix_at(B, idx[2], idx[1]);
 		}
 	}
 	if (do_free)
 		matrix_pair_clear(A, B);
-	return (M);
+	return (m);
 }
 
 t_matrix	*matrix_add(t_matrix *A, t_matrix *B, t_bool do_free)
 {
 	int			i;
 	int			j;
-	t_matrix	*M;
+	t_matrix	*m;
 
 	if (!A || !B)
 		return (NULL);
@@ -55,40 +55,40 @@ t_matrix	*matrix_add(t_matrix *A, t_matrix *B, t_bool do_free)
 		return (NULL);
 	if (!check_matrix_nrows(A->ncols, B->ncols))
 		return (NULL);
-	M = matrix_empty(A->nrows, A->ncols);
+	m = matrix_empty(A->nrows, A->ncols);
 	i = -1;
 	while (++i < A->nrows)
 	{
 		j = -1;
 		while (++j < B->ncols)
-			M->data[i * A->ncols + j] = matrix_at(A, i, j) * matrix_at(B, i, j);
+			m->data[i * A->ncols + j] = matrix_at(A, i, j) * matrix_at(B, i, j);
 	}
 	if (do_free)
 		matrix_pair_clear(A, B);
-	return (M);
+	return (m);
 }
 
-t_matrix	*matrix_transpose(t_matrix	*M, t_bool do_free)
+t_matrix	*matrix_transpose(t_matrix	*m, t_bool do_free)
 {
 	int			i;
 	int			j;
-	t_matrix	*M_T;
+	t_matrix	*m_t;
 
-	if (!M)
+	if (!m)
 		return (NULL);
-	M_T = matrix_empty(M->ncols, M->nrows);
+	m_t = matrix_empty(m->ncols, m->nrows);
 	i = 0;
-	while (i < M->nrows)
+	while (i < m->nrows)
 	{
 		j = 0;
-		while (j < M->ncols)
+		while (j < m->ncols)
 		{
-			M_T->data[j * M->nrows + i] = M->data[i * M->ncols + j];
+			m_t->data[j * m->nrows + i] = m->data[i * m->ncols + j];
 			j++;
 		}
 		i++;
 	}
 	if (do_free)
-		matrix_clear(M);
-	return (M_T);
+		matrix_clear(m);
+	return (m_t);
 }

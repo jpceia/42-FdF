@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 23:03:39 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/08 01:08:46 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:18:41 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_grid		*grid_parse_file(t_grid **grid, char *fname);
 t_grid		*list_to_grid(t_list *lst, t_grid **grid);
 float		grid_max(const t_grid *grid, t_coord coord);
 float		grid_min(const t_grid *grid, t_coord coord);
-t_grid		*grid_apply_transformation(t_grid *grid, t_matrix *M);
+t_grid		*grid_apply_transformation(t_grid *grid, t_matrix *m);
 
 /*
  * Utils

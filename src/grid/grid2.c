@@ -6,7 +6,7 @@
 /*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 00:47:52 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/08 01:08:46 by jceia            ###   ########.fr       */
+/*   Updated: 2021/10/08 01:18:55 by jceia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-t_grid	*grid_apply_transformation(t_grid *grid, t_matrix *M)
+t_grid	*grid_apply_transformation(t_grid *grid, t_matrix *m)
 {
 	int		i;
 	int		j;
@@ -25,7 +25,7 @@ t_grid	*grid_apply_transformation(t_grid *grid, t_matrix *M)
 		j = 0;
 		while (j < grid->width)
 		{
-			grid->data[i][j] = matrix_homogenous_mul_vec3d(M, grid->data[i][j]);
+			grid->data[i][j] = matrix_homogenous_mul_vec3d(m, grid->data[i][j]);
 			j++;
 		}
 		i++;
@@ -87,18 +87,18 @@ void	grid_draw_vertical(t_mlx *data, const t_grid *grid)
 
 void	grid_draw(t_mlx *data)
 {
-	t_matrix	*M;
+	t_matrix	*m;
 	t_grid		*grid_cpy;
 
-	M = camera_transform(data->cam);
-	if (!M)
+	m = camera_transform(data->cam);
+	if (!m)
 		clean_exit(data, "Error calculating the camera transform",
 			mlx_data_clear, 1);
 	grid_cpy = grid_clone(data->grid);
 	if (!grid_cpy)
 		clean_exit(data, "Error creating a grid clone", mlx_data_clear, 1);
-	grid_apply_transformation(grid_cpy, M);
-	matrix_clear(M);
+	grid_apply_transformation(grid_cpy, m);
+	matrix_clear(m);
 	grid_draw_horizontal(data, grid_cpy);
 	grid_draw_vertical(data, grid_cpy);
 	grid_clear(grid_cpy);
