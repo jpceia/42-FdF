@@ -50,6 +50,7 @@
 # define KEY_RELEASE	03
 # define BUTTON_PRESS	04
 # define BUTTON_RELEASE 05
+# define MOTION_NOTIFY	06
 # ifdef OS_Linux
 #  define DESTROY_NOTIFY	17
 # else
@@ -64,6 +65,7 @@
 # define M_KEY_RELEASE		2L
 # define M_BUTTON_PRESS 	4L
 # define M_BUTTON_RELEASE	8L
+# define M_POINTER_MOTION	64L
 
 /*
  * Color

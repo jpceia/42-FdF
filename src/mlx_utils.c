@@ -92,10 +92,7 @@ void	mlx_data_clear(void *ptr)
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx)
-	{
-		mlx_destroy_display(data->mlx);
 		free(data->mlx);
-	}
 	if (data->cam)
 		free(data->cam);
 	if (data->mouse)
