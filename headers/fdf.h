@@ -20,29 +20,46 @@
 # define WIN_WIDTH		1080
 # define WIN_HEIGHT		720
 
-# define K_LEFT_ARROW	65361
-# define K_RIGHT_ARROW	65363
-# define K_UP_ARROW		65362
-# define K_DOWN_ARROW	65364
-# define K_ESC			65307
-# define K_A			97
-# define K_D			100
-# define K_W			119
-# define K_S			115
+# ifdef OS_Linux
+#  define K_LEFT_ARROW	65361
+#  define K_RIGHT_ARROW	65363
+#  define K_UP_ARROW	65362
+#  define K_DOWN_ARROW	65364
+#  define K_ESC			65307
+#  define K_A			97
+#  define K_D			100
+#  define K_W			119
+#  define K_S			115
+# else
+#  define K_LEFT_ARROW	123
+#  define K_RIGHT_ARROW	124
+#  define K_UP_ARROW	126
+#  define K_DOWN_ARROW	125
+#  define K_ESC			53
+#  define K_A			0
+#  define K_D			2
+#  define K_W			13
+#  define K_S			1
+# endif
 
 /*
  * X11 Events
  */
+
 # define KEY_PRESS		02
 # define KEY_RELEASE	03
 # define BUTTON_PRESS	04
 # define BUTTON_RELEASE 05
-# define DESTROY_NOTIFY	17
+# ifdef OS_Linux
+#  define DESTROY_NOTIFY	17
+# else
+#  define DESTROY_NOTIFY	33
+# endif
 
 /*
  * X11 Masks
  */
-# define M_NO_EVENT			0L
+# define M_NO_EVENT			0L // 131072
 # define M_KEY_PRESS		1L
 # define M_KEY_RELEASE		2L
 # define M_BUTTON_PRESS 	4L
