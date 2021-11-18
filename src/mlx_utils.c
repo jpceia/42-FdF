@@ -16,6 +16,15 @@
 #include "fdf.h"
 #include "libft.h"
 
+/**
+ * @brief Function to clean up and exit the program.
+ * 
+ * @param 	data	the variable to clean up.
+ * @param 	msg		the error message to print.
+ * @param 	del		the clean up function to call.
+ * @param 	do_exit	if the program should exit.
+ * @return	void*	always returns NULL
+ */
 void	*clean_exit(void *data, char *msg, void (*del)(void *), int do_exit)
 {
 	perror(msg);
@@ -26,6 +35,17 @@ void	*clean_exit(void *data, char *msg, void (*del)(void *), int do_exit)
 	return (NULL);
 }
 
+/**
+ * @brief	Calculates the color grid structure, based on the height of the
+ * 			map and the color scheme (consisting of two colors).
+ * 
+ * @param color_grid	the color grid structure to fill.
+ * 						(the structure is allocated by the function)
+ * @param	grid		the height map.
+ * @param	colors		an array of two colors.
+ * @return t_grid*		the color grid structure.
+ * 						NULL if an error occurred.
+ */
 t_grid	*color_grid_init(t_grid **color_grid, const t_grid *grid,
 		const t_vec3d colors[2])
 {
@@ -56,6 +76,14 @@ t_grid	*color_grid_init(t_grid **color_grid, const t_grid *grid,
 	return (*color_grid);
 }
 
+/**
+ * @brief	Initializes the mlx data structure.
+ * @note	If the allocation fails, the program will exit.
+ * 
+ * @param	data	reference to the mlx data structure, allocated by the caller.
+ * @param	args	arguments passed to the program.
+ * @return	t_mlx*	pointer to the initialized mlx data structure. 
+ */
 t_mlx	*mlx_data_init(t_mlx *data, const t_args *args)
 {
 	if (!grid_parse_file(args->fname, &(data->grid)))
@@ -80,6 +108,11 @@ t_mlx	*mlx_data_init(t_mlx *data, const t_args *args)
 	return (data);
 }
 
+/**
+ * @brief	Cleans up the mlx data structure.
+ * 
+ * @param	ptr	pointer to the mlx data structure.
+ */
 void	mlx_data_clear(void *ptr)
 {
 	t_mlx	*data;

@@ -3,16 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_draw.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jceia <jceia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jpceia <joao.p.ceia@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 01:23:27 by jceia             #+#    #+#             */
-/*   Updated: 2021/10/08 01:08:46 by jceia            ###   ########.fr       */
+/*   Updated: 2021/11/18 11:37:48 by jpceia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
 
+/**
+ * @brief	Draws a point on the mlx image.
+ * 
+ * @param	data	the mlx data structure.
+ * @param	p		the point to draw.
+ * @param	color	the color of the point.
+ */
 void	plot_pixel(t_mlx *data, t_vec2d p, t_vec3d color)
 {
 	int		i;
@@ -27,6 +34,14 @@ void	plot_pixel(t_mlx *data, t_vec2d p, t_vec3d color)
 	*(unsigned int *)dst += create_trgb(color);
 }
 
+/**
+ * @brief	Draws a line between two points on the mlx image.
+ * 			The resulting line will be a gradient between the two colors.
+ * 
+ * @param	data	the mlx data structure.
+ * @param	p		an array of two points (start and end).
+ * @param	color	an array of two colors (start and end).
+ */
 void	plot_line(t_mlx *data, t_vec2d p[2], t_vec3d color[2])
 {
 	int		i;
